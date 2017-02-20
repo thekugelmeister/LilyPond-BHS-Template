@@ -27,35 +27,31 @@ along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-                                % TODO: Can this be auto-capitalized on title page?
 %% Title of the Song
-% This should be uppercase on the title page
 % title = "_Title_"
-title = "Shine On, Harvest Moon"
-
-                                % TODO: Can some of these fields be auto-formatted?
+title = "Title"
 
 %% Subtitle
-% subtitle = "(_Subtitle_)"
-subtitle = ""
+% subtitle = "_Subtitle_"
+subtitle = "Subtitle"
 
 %% Date, if public Domain
-% date = "(_year_)"
-date = ""
+% date = "_year_"
+date = "0000"
 
 %% Lyricists, if not the composer
-% lyricist = "Words by FIRSTNAME LASTNAME"
-lyricist = ""
-% secondlyricist = "and FIRSTNAME LASTNAME"
-secondlyricist = ""
+% lyricist = "_First_ _Last_"
+lyricist = "First Last"
+% secondlyricist = "_First_ _Last_"
+secondlyricist = "First Last"
 
 %% Composer
-% composer = "Music by FIRSTNAME LASTNAME"
-composer = ""
+% composer = "_First_ _Last_"
+composer = "First Last"
 
 %% Arranger
-% arranger = "Arranged by FIRSTNAME LASTNAME"
-arranger = ""
+% arranger = "_First_ _Last_"
+arranger = "First Last"
 
                                 % TODO: Can this just take a copyright date and name and fill them in?
 %% Copyright
@@ -79,19 +75,19 @@ assungby = ""
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 global = {
-    %% Key Signature at the beginning of the piece. If it changes, it will be explicitly changed.
-    \key bes \major
+  %% Key Signature at the beginning of the piece. If it changes, it will be explicitly changed.
+  \key c \major
 
-    %% Time Signature
-    \time 2/2
+  %% Time Signature
+  \time 4/4
+  \tempo 4=100
 
                                 % TODO: Can this be moved elsewhere and appended to global attributes later?
 %%%% STOP EDITING HERE
-    \set Score.tempoHideNote = ##t
-    \tempo 4=100
-    \override Score.BarNumber.break-visibility = ##(#f #t #t)
+  \set Score.tempoHideNote = ##t
+  \override Score.BarNumber.break-visibility = ##(#f #t #t)
 
-  }
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%
@@ -99,8 +95,53 @@ global = {
 %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-tenorMusic = \relative c'' {
+tenorMusic = \relative c' {
   |
+  e4 e4 e4 e4 |
+  e4 e4 e4 e4 |
+  e4 e4 e4 e4 |
+  e4 e4 e4 e4 |
+  e4 e4 e4 e4 |
+  e4 e4 e4 e4 |
+  e4 e4 e4 e4 |
+  e4 e4 e4 e4 |
+
+  e4 e4 e4 e4 |
+  e4 e4 e4 e4 |
+  e4 e4 e4 e4 |
+  e4 e4 e4 e4 |
+  e4 e4 e4 e4 |
+  e4 e4 e4 e4 |
+  e4 e4 e4 e4 |
+  e4 e4 e4 e4 |
+
+  e4 e4 e4 e4 |
+  e4 e4 e4 e4 |
+  e4 e4 e4 e4 |
+  e4 e4 e4 e4 |
+  e4 e4 e4 e4 |
+  e4 e4 e4 e4 |
+  e4 e4 e4 e4 |
+  e4 e4 e4 e4 |
+
+  e4 e4 e4 e4 |
+  e4 e4 e4 e4 |
+  e4 e4 e4 e4 |
+  e4 e4 e4 e4 |
+  e4 e4 e4 e4 |
+  e4 e4 e4 e4 |
+  e4 e4 e4 e4 |
+  e4 e4 e4 e4 |
+
+  e4 e4 e4 e4 |
+  e4 e4 e4 e4 |
+  e4 e4 e4 e4 |
+  e4 e4 e4 e4 |
+  e4 e4 e4 e4 |
+  e4 e4 e4 e4 |
+  e4 e4 e4 e4 |
+  e4 e4 e4 e4 |
+
   \bar "|."
 }
 
@@ -116,11 +157,98 @@ tenorWords = \lyricmode {
 
 leadMusic = \relative c' {
   |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
   \bar "|."
 }
 
 leadWords = \lyricmode {
+  Word word word word.
+  Word word word word.
+  Word word word word.
+  Word word word word.
+  Word word word word.
+  Word word word word.
+  Word word word word.
+  Word word word word.
 
+  Word word word word.
+  Word word word word.
+  Word word word word.
+  Word word word word.
+  Word word word word.
+  Word word word word.
+  Word word word word.
+  Word word word word.
+
+  Word word word word.
+  Word word word word.
+  Word word word word.
+  Word word word word.
+  Word word word word.
+  Word word word word.
+  Word word word word.
+  Word word word word.
+
+  Word word word word.
+  Word word word word.
+  Word word word word.
+  Word word word word.
+  Word word word word.
+  Word word word word.
+  Word word word word.
+  Word word word word.
+
+  Word word word word.
+  Word word word word.
+  Word word word word.
+  Word word word word.
+  Word word word word.
+  Word word word word.
+  Word word word word.
+  Word word word word.
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -131,6 +259,50 @@ leadWords = \lyricmode {
 
 bariMusic = \relative c' {
   |
+  g4 g4 g4 g4 |
+  g4 g4 g4 g4 |
+  g4 g4 g4 g4 |
+  g4 g4 g4 g4 |
+  g4 g4 g4 g4 |
+  g4 g4 g4 g4 |
+  g4 g4 g4 g4 |
+  g4 g4 g4 g4 |
+
+  g4 g4 g4 g4 |
+  g4 g4 g4 g4 |
+  g4 g4 g4 g4 |
+  g4 g4 g4 g4 |
+  g4 g4 g4 g4 |
+  g4 g4 g4 g4 |
+  g4 g4 g4 g4 |
+  g4 g4 g4 g4 |
+
+  g4 g4 g4 g4 |
+  g4 g4 g4 g4 |
+  g4 g4 g4 g4 |
+  g4 g4 g4 g4 |
+  g4 g4 g4 g4 |
+  g4 g4 g4 g4 |
+  g4 g4 g4 g4 |
+  g4 g4 g4 g4 |
+
+  g4 g4 g4 g4 |
+  g4 g4 g4 g4 |
+  g4 g4 g4 g4 |
+  g4 g4 g4 g4 |
+  g4 g4 g4 g4 |
+  g4 g4 g4 g4 |
+  g4 g4 g4 g4 |
+  g4 g4 g4 g4 |
+  
+  g4 g4 g4 g4 |
+  g4 g4 g4 g4 |
+  g4 g4 g4 g4 |
+  g4 g4 g4 g4 |
+  g4 g4 g4 g4 |
+  g4 g4 g4 g4 |
+  g4 g4 g4 g4 |
+  g4 g4 g4 g4 |
   \bar "|."
 }
 
@@ -146,6 +318,50 @@ bariWords = \lyricmode {
 
 bassMusic = \relative c {
   |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
+  c4 c4 c4 c4 |
   \bar "|."
 }
 
@@ -163,19 +379,51 @@ bassWords = \lyricmode {
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \header {
-    title = \title
-    subtitle = \subtitle
-    subsubtitle = \date
-    poet = \lyricist
-    composer = \composer
-    arranger = \arranger
-    copyright = \copyright
-    tagline = \tagline
-    dedication = ""
-    instrument = \assungby
-    meter = \secondlyricist
-}
+                                % TODO: Currently, \caps does not seem to work for \fromproperty #'header:songtitle.
+                                % TODO: \caps is small-caps; want full caps.
+                                % TODO: Make un-specified header entries remain blank.
 
+  songtitle = \title
+  title= \markup {
+    \caps { \title }
+  }
+  subtitle = \markup {
+    \concat {
+      (
+      \caps { \subtitle }
+      )
+    }
+  }
+  subsubtitle = \markup {
+    \concat {
+      (
+      \date
+      )
+    }
+  }
+                                % TODO: Conditionally make poet contain "Words and Music by \composer"
+  poet = \markup {
+    Words by
+    \caps { \lyricist }
+  }
+                                % TODO: Conditionally make composer and arranger contain "Words, Music and Arrangement" and "by \composer" respectively
+  composer = \markup {
+    Music by
+    \caps { \composer }
+  }
+  arranger = \markup {
+    Arrangement by
+    \caps { \arranger }
+  }
+  copyright = \copyright
+  tagline = \tagline
+  dedication = ""
+  instrument = \assungby
+  meter = \markup {
+    and
+    \caps { \secondlyricist }
+  }
+}
 
 %%% Set staff size to BHS Size:
 %%% @Section A.1.d.
@@ -189,30 +437,30 @@ bassWords = \lyricmode {
 
 allowGrobCallback =
 #(define-scheme-function (parser location syms) (symbol-list?)
-     (let ((interface (car syms))
-           (sym (cadr syms)))
-         #{
-             \with {
-                 \consists #(lambda (context)
-                                `((acknowledgers .
-                                      ((,interface . ,(lambda (engraver grob source-engraver)
-                                                          (let ((prop (ly:grob-property grob sym)))
-                                                              (if (procedure? prop) (ly:grob-set-property! grob sym (prop grob)))
-                                                              ))))
-                                      ))
-                                )
-             }
-         #}))
+  (let ((interface (car syms))
+        (sym (cadr syms)))
+   #{
+   \with {
+   \consists #(lambda (context)
+               `((acknowledgers .
+                  ((,interface . ,(lambda (engraver grob source-engraver)
+                                   (let ((prop (ly:grob-property grob sym)))
+                                    (if (procedure? prop) (ly:grob-set-property! grob sym (prop grob)))
+                                  ))))
+                ))
+             )
+ }
+   #}))
 
 absFontSize =
 #(define-scheme-function (parser location pt)(number?)
-     (lambda (grob)
-         (let* ((layout (ly:grob-layout grob))
-                (ref-size (ly:output-def-lookup (ly:grob-layout grob) 'text-font-size 12)))
-             (magnification->font-size (/ pt ref-size))
-             )
-         )
-     )
+  (lambda (grob)
+   (let* ((layout (ly:grob-layout grob))
+          (ref-size (ly:output-def-lookup (ly:grob-layout grob) 'text-font-size 12)))
+    (magnification->font-size (/ pt ref-size))
+  )
+ )
+)
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -226,121 +474,137 @@ absFontSize =
 %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \paper {
-    #(set-paper-size "letter")
-    bottom-margin   = 0.50\in
-    top-margin      = 0.50\in
-    inner-margin     = 0.50\in
-    outer-margin	= 0.625\in % 5/8 inch
-    line-width      = 7.375\in % 8.5 inch page width - ( inner-margin + outer-margin )
-    last-bottom-spacing = 0.5\in
-    ragged-last-bottom = ##t
+  #(set-paper-size "letter")
+  bottom-margin   = 0.50\in
+  top-margin      = 0.50\in
+  inner-margin     = 0.50\in
+  outer-margin	= 0.625\in % 5/8 inch
+  line-width      = 7.375\in % 8.5 inch page width - ( inner-margin + outer-margin )
+  last-bottom-spacing = 0.5\in
+  ragged-last-bottom = ##t
+  markup-system-spacing.padding = #8
+  system-system-spacing.padding = #4
+  max-systems-per-page = 5
 
-    bookTitleMarkup = \markup {
-        \override #'(baseline-skip . 3.5)
+  bookTitleMarkup = \markup {
+    \override #'(baseline-skip . 3.5)
 
-        \column {
-            \fill-line {
-                \fromproperty #'header:dedication
-            }
+    \column {
+      \fill-line {
+        \fromproperty #'header:dedication
+      }
 %%% Title in 22 pt Arial Bold
 %%% @Section A.4.a
-            \override #'(baseline-skip . 3.5)
-            \column {
-                \fill-line {
-                    \abs-fontsize #22 {
-                        \override #'(font-name . "Arial Bold") {
-                            \fromproperty #'header:title
-                        }
-                    }
-                }
+      \override #'(baseline-skip . 3.5)
+      \column {
+        \fill-line {
+          \abs-fontsize #22 {
+            \override #'(font-name . "Arial Bold") {
+              \fromproperty #'header:title
+            }
+          }
+        }
 %%% Subtitle in 12 pt Arial Bold
 %%% @Section A.4.b
-                \fill-line {
-                    \abs-fontsize #12 {
-                        \override #'(font-name . "Arial Bold") {
-                            \fromproperty #'header:subtitle
-                        }
-                    }
-                }
+        \fill-line {
+          \abs-fontsize #12 {
+            \override #'(font-name . "Arial Bold") {
+              \fromproperty #'header:subtitle
+            }
+          }
+        }
 %%% Date if in public Domain
 %%% @Section 5
-                \fill-line {
-                    \abs-fontsize #12 {
-                        \override #'(font-name . "Arial Bold") {
-                            \fromproperty #'header:subsubtitle
-                        }
-                    }
-                }
+        \fill-line {
+          \abs-fontsize #12 {
+            \override #'(font-name . "Arial Bold") {
+              \fromproperty #'header:subsubtitle
+            }
+          }
+        }
 %%% Lyricist's Name
 %%% @Section 7
-                \fill-line {
-                    \abs-fontsize #12 {
-                        \override #'(font-name . "Times") {
-                            \fromproperty #'header:poet
-                        }
-                    }
-                    {
-                        \abs-fontsize #10 {
-                            \override #'(font-name . "Times Italic") {
-                                \italic \fromproperty #'header:instrument
-                            }
-                        }
-                    } \abs-fontsize #12 {
-                        \override #'(font-name . "Times") {
-                            \fromproperty #'header:composer
-                        }
-                    }
-                }
-                \fill-line {
-                    \fromproperty #'header:meter
-                    \fromproperty #'header:arranger
-                }
+        \fill-line {
+          \abs-fontsize #12 {
+            \override #'(font-name . "Times") {
+              \fromproperty #'header:poet
             }
+          }
+          {
+            \abs-fontsize #10 {
+              \override #'(font-name . "Times Italic") {
+                \italic \fromproperty #'header:instrument
+              }
+            }
+          } \abs-fontsize #12 {
+            \override #'(font-name . "Times") {
+              \fromproperty #'header:composer
+            }
+          }
         }
+        \fill-line {
+          \fromproperty #'header:meter
+          \fromproperty #'header:arranger
+        }
+      }
     }
+  }
 
-    oddFooterMarkup = \markup {
+                                % TODO: Center copyright
+  oddFooterMarkup = \markup {
+    \column {
+      \fill-line {
         \column {
-            \fill-line {
-                \column {
-                    " "
-                    %% Copyright header field only on first page in each bookpart.
-                    \on-the-fly #part-first-page
-                    \abs-fontsize #9 {
-                        \override #'(line-width . 110)
-                        \override #'(font-name . "Times")
-                        \wordwrap-field #'header:copyright
-                    }
-                }
-            }
-            \fill-line {
-                %% Tagline header field only on last page in the book.
-                \on-the-fly #last-page
-                \abs-fontsize #9 {
-                    \override #'(line-width . 110)
-                    \override #'(font-name . "Times")
-                    \wordwrap-field #'header:tagline
-                }
-            }
+          " "
+          %% Copyright header field only on first page in each bookpart.
+          \on-the-fly #part-first-page
+          \abs-fontsize #9 {
+            \override #'(line-width . 110)
+            \override #'(font-name . "Times")
+            \wordwrap-field #'header:copyright
+          }
         }
-    }
-
-    oddHeaderMarkup = \markup
-
-    \fill-line {
-        %% force the header to take some space, otherwise the
-        %% page layout becomes a complete mess.
-        " "
-        \on-the-fly #not-part-first-page
+      }
+      \fill-line {
+        %% Tagline header field only on last page in the book.
+        \on-the-fly #last-page
         \abs-fontsize #9 {
-            \override #'(font-name . "Times Italic")
-            \fromproperty #'header:title
-            \on-the-fly #print-page-number-check-first \italic \fromproperty #'page:page-number-string
+          \override #'(line-width . 110)
+          \override #'(font-name . "Times")
+          \wordwrap-field #'header:tagline
         }
+      }
     }
+  }
+
+  oddHeaderMarkup = \markup
+
+  \fill-line {
+    %% force the header to take some space, otherwise the
+    %% page layout becomes a complete mess.
+    " "
+    \on-the-fly #not-part-first-page
+    \abs-fontsize #12 {
+      \override #'(font-name . "Times Italic")
+      \fromproperty #'header:songtitle
+      \on-the-fly #print-page-number-check-first \italic \fromproperty #'page:page-number-string
+    }
+  }
 
 
-    %% Needs evenHeaderMarkup
+  evenHeaderMarkup = \markup
+
+  \fill-line {
+    \on-the-fly #not-part-first-page
+    \abs-fontsize #12 {
+      \on-the-fly #print-page-number-check-first \italic \fromproperty #'page:page-number-string
+      \override #'(font-name . "Times Italic")
+      \fromproperty #'header:songtitle
+    }
+    %% force the header to take some space, otherwise the
+    %% page layout becomes a complete mess.
+    " "
+  }
 }
 
 
@@ -360,78 +624,78 @@ xVoice = \markup { \smaller \sans { x } } % print this by using '\xVoice'
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \score
 {
-    \new ChoirStaff <<
-        \new Lyrics = "tenors" \with {
-            % this is needed for lyrics above a staff
-            \override VerticalAxisGroup.staff-affinity = #DOWN
-        }{ s1 }
-        \new Staff = topstaff <<
-            \override Staff.InstrumentName.self-alignment-X = #LEFT
-            \set Staff.instrumentName = \markup \left-column {
-                "Tenor"
-                "Lead"
-            }
-            \set Staff.shortInstrumentName = #""
-            \clef "treble_8"
-            \new Voice = "tenors" {
-                \voiceOne
-                <<
-                    \global
-                    \set midiInstrument = #"clarinet"
-                    \tenorMusic
-                >>
-            }
-            \new Voice = "leads" {
-                \voiceTwo
-                << \global \leadMusic >>
-            }
+  \new ChoirStaff <<
+    \new Lyrics = "tenors" \with {
+      % this is needed for lyrics above a staff
+      \override VerticalAxisGroup.staff-affinity = #DOWN
+    }{ s1 }
+    \new Staff = topstaff <<
+      \override Staff.InstrumentName.self-alignment-X = #LEFT
+      \set Staff.instrumentName = \markup \left-column {
+        "Tenor"
+        "Lead"
+      }
+      \set Staff.shortInstrumentName = #""
+      \clef "treble_8"
+      \new Voice = "tenors" {
+        \voiceOne
+        <<
+          \global
+          \set midiInstrument = #"clarinet"
+          \tenorMusic
         >>
-        \new Lyrics = "leads" { s1 }
-        \new Lyrics = "baris" \with {
-            % this is needed for lyrics above a staff
-            \override VerticalAxisGroup.staff-affinity = #DOWN
-        } { s1 }
-        \new Staff = bottomstaff <<
-            \override Staff.InstrumentName.self-alignment-X = #LEFT
-            \set Staff.instrumentName = \markup \left-column {
-                "Bari"
-                "Bass"
-            }
-            \set Staff.shortInstrumentName = #""
-            \clef bass
-            \new Voice = "baris" {
-                \voiceOne
-                << \global \bariMusic >>
-            }
-            \new Voice = "basses" {
-                \voiceTwo << \global \bassMusic >>
-            }
-        >>
-        \new Lyrics = basses { s1 }
-        \context Lyrics = tenors \lyricsto tenors \tenorWords
-        \context Lyrics = leads \lyricsto leads \leadWords
-        \context Lyrics = baris \lyricsto baris \bariWords
-        \context Lyrics = basses \lyricsto basses \bassWords
+      }
+      \new Voice = "leads" {
+        \voiceTwo
+        << \global \leadMusic >>
+      }
     >>
-    \layout {
-        \context {
-            \Staff
-        }
-        \context {
-            \Lyrics
-            \override LyricSpace.minimum-distance = #2.0
-            \override LyricText.font-size = \absFontSize #11
-        }
+    \new Lyrics = "leads" { s1 }
+    \new Lyrics = "baris" \with {
+      % this is needed for lyrics above a staff
+      \override VerticalAxisGroup.staff-affinity = #DOWN
+    } { s1 }
+    \new Staff = bottomstaff <<
+      \override Staff.InstrumentName.self-alignment-X = #LEFT
+      \set Staff.instrumentName = \markup \left-column {
+        "Bari"
+        "Bass"
+      }
+      \set Staff.shortInstrumentName = #""
+      \clef bass
+      \new Voice = "baris" {
+        \voiceOne
+        << \global \bariMusic >>
+      }
+      \new Voice = "basses" {
+        \voiceTwo << \global \bassMusic >>
+      }
+    >>
+    \new Lyrics = basses { s1 }
+    \context Lyrics = tenors \lyricsto tenors \tenorWords
+    \context Lyrics = leads \lyricsto leads \leadWords
+    \context Lyrics = baris \lyricsto baris \bariWords
+    \context Lyrics = basses \lyricsto basses \bassWords
+  >>
+  \layout {
+    \context {
+      \Staff
     }
-    \midi {
-        midiChannelMapping = #'voice
-        \context {
-            \ChoirStaff
-            \remove "Staff_performer"
-        }
-        \context {
-            \Voice
-            \consists "Staff_performer"
-        }
+    \context {
+      \Lyrics
+      \override LyricSpace.minimum-distance = #2.0
+      \override LyricText.font-size = \absFontSize #11
     }
+  }
+  \midi {
+    midiChannelMapping = #'voice
+    \context {
+      \ChoirStaff
+      \remove "Staff_performer"
+    }
+    \context {
+      \Voice
+      \consists "Staff_performer"
+    }
+  }
 }
