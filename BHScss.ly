@@ -26,47 +26,45 @@ along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 %%% Define Header
 %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Lilypond will provide default values to any undefined header variables. If
+%% you do not want to display one of these values, assign it the empty string ("").
+%%
+%% Composer, Lyricist, and Arranger can be the same person. If this is the case,
+%% place their name in all relevant fields. Formatting will be handled for you.
+%%
+%% Any other required text modification will be handled automatically.
 
 %% Title of the Song
-% title = "_Title_"
-title = "Title"
+deftitle = "Title"
 
 %% Subtitle
-% subtitle = "_Subtitle_"
-subtitle = "Subtitle"
+defsubtitle = "Subtitle"
 
 %% Date, if public Domain
-% date = "_year_"
-date = "0000"
-
-%% Lyricists, if not the composer
-% lyricist = "_First_ _Last_"
-lyricist = "First Last"
-% secondlyricist = "_First_ _Last_"
-secondlyricist = "First Last"
+defdate = "date"
 
 %% Composer
-% composer = "_First_ _Last_"
-composer = "First Last"
+defcomposer = "Composer Name"
+
+%% Lyricist(s)
+deflyricist = "Lyricist Name"
 
 %% Arranger
-% arranger = "_First_ _Last_"
-arranger = "First Last"
+defarranger = "Arranger Name"
 
                                 % TODO: Can this just take a copyright date and name and fill them in?
 %% Copyright
 % Bottom of first page. Add date and name.
-copyright = "This arrangement © 201_ SOMEONE. All Rights Reserved. No recording use, public performance for profit use or any other use requiring authorization, or reproduction or sale of copies in any form shall be made of or from this Arrangement unless licensed by the copyright owner or an agent or organization acting on behalf of the copyright owner."
+defcopyright = "This arrangement © 201_ SOMEONE. All Rights Reserved. No recording use, public performance for profit use or any other use requiring authorization, or reproduction or sale of copies in any form shall be made of or from this Arrangement unless licensed by the copyright owner or an agent or organization acting on behalf of the copyright owner."
 
 %% Tagline
 % Appears at the bottom of the last page.
-tagline = "Questions about the contest suitability of this song/arrangement should be directed to the judging community and measured against current contest rules. Ask before you sing."
+deftagline = "Questions about the contest suitability of this song/arrangement should be directed to the judging community and measured against current contest rules. Ask before you sing."
 
 %% Additional information
-% assungby = "as sung by _Group_"
-% assungby = "from the movie _MovieTitle_"
-% assungby = "for _voicepart-specification_"
-assungby = ""
+defadditionalinfo = "as sung by nobody, for no voices, from no known source"
+
+                                % TODO: Add Performance Notes section and formatting
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%
@@ -381,48 +379,58 @@ bassWords = \lyricmode {
 \header {
                                 % TODO: Currently, \caps does not seem to work for \fromproperty #'header:songtitle.
                                 % TODO: \caps is small-caps; want full caps.
-                                % TODO: Make un-specified header entries remain blank.
 
-  songtitle = \title
+  %% Title
+  songtitle = \deftitle
   title= \markup {
-    \caps { \title }
+    \caps { \deftitle }
   }
-  subtitle = \markup {
-    \concat {
-      (
-      \caps { \subtitle }
-      )
-    }
-  }
-  subsubtitle = \markup {
-    \concat {
-      (
-      \date
-      )
-    }
-  }
-                                % TODO: Conditionally make poet contain "Words and Music by \composer"
-  poet = \markup {
-    Words by
-    \caps { \lyricist }
-  }
-                                % TODO: Conditionally make composer and arranger contain "Words, Music and Arrangement" and "by \composer" respectively
-  composer = \markup {
-    Music by
-    \caps { \composer }
-  }
-  arranger = \markup {
-    Arrangement by
-    \caps { \arranger }
-  }
-  copyright = \copyright
-  tagline = \tagline
-  dedication = ""
-  instrument = \assungby
-  meter = \markup {
-    and
-    \caps { \secondlyricist }
-  }
+  %% Subtitle
+  subtitle = #(if (string=? defsubtitle "")
+               ""
+               #{ \markup { \concat { ( \caps { \defsubtitle } ) } } #})
+  %% Date
+  subsubtitle = #(if (string=? defdate "")
+                  ""
+                  #{ \markup { \concat { ( \defdate ) } } #})
+
+  %% Composer, Lyricist, and Arranger
+  #(begin
+    (if (string=? defcomposer "")
+     (begin
+      (define composer "")
+      (if (string=? deflyricist "")
+       (define poet "")
+       (define poet #{ \markup { Words by \caps { \deflyricist } } #}))
+      (if (string=? defarranger "")
+       (define arranger "")
+       (define arranger #{ \markup { Arrangement by \caps { \defarranger } } #})))
+     (if (string=? defcomposer deflyricist defarranger)
+      (begin
+       (define composer "Words, Music, and Arrangement")
+       (define arranger #{ \markup { by \caps { \defcomposer } } #})
+       (define poet ""))
+      (if (string=? defcomposer deflyricist)
+       (begin
+        (define arranger "")
+        (define poet #{ \markup { Words and Music by \caps { \defcomposer } } #})
+        (if (string=? defarranger "")
+         (define composer "")
+         (define composer #{ \markup { Arrangement by \caps { \defarranger } } #})))
+       (begin
+        (define composer #{ \markup { Music by \caps { \defcomposer } } #})
+        (if (string=? deflyricist "")
+         (define poet "")
+         (define poet #{ \markup { Words by \caps { \deflyricist } } #}))
+        (if (string=? defarranger "")
+         (define arranger "")
+         (define arranger #{ \markup { Arrangement by \caps { \defarranger } } #})))))))
+
+  %% Everything else
+  copyright = \defcopyright
+  tagline = \deftagline
+                                % TODO: Space below instrument line needs to be larger
+  instrument = \defadditionalinfo
 }
 
 %%% Set staff size to BHS Size:
