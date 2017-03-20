@@ -61,10 +61,14 @@ defcopyright = "This arrangement © 201_ SOMEONE. All Rights Reserved. No record
 % Appears at the bottom of the last page.
 deftagline = "Questions about the contest suitability of this song/arrangement should be directed to the judging community and measured against current contest rules. Ask before you sing."
 
-%% Additional information
+%% Additional Information
 defadditionalinfo = "as sung by nobody, for no voices, from no known source"
 
-                                % TODO: Add Performance Notes section and formatting
+%% Performance Notes
+defperformancenotes = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed venenatis risus eu fermentum molestie. Aliquam orci felis, convallis et dictum ac, aliquet in justo. Duis rutrum elementum purus sit amet maximus. Pellentesque feugiat convallis velit, ac sodales sem molestie quis. Quisque vitae lectus risus. In hac habitasse platea dictumst. Donec porta consequat mauris, quis consectetur lacus consectetur ut. Sed massa leo, tempus sit amet lorem nec, luctus fermentum risus. Proin mi urna, posuere in purus ut, molestie finibus diam.
+
+
+Nam laoreet auctor felis eu interdum. Nulla sapien dui, elementum nec nisi consectetur, facilisis auctor purus. Fusce quis turpis massa. Aliquam fermentum dignissim tortor ac molestie. Phasellus lobortis consectetur ligula vel sagittis. Suspendisse id aliquet massa. Suspendisse a est est. Cras ut sapien tempor, dapibus ante fermentum, dictum tortor."
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%
@@ -559,6 +563,7 @@ absFontSize =
   }
 
                                 % TODO: Center copyright
+                                % TODO: Why does oddFooterMarkup work for even pages too?
   oddFooterMarkup = \markup {
     \column {
       \fill-line {
@@ -585,6 +590,7 @@ absFontSize =
     }
   }
 
+                                % TODO: Increase space around title headers
   oddHeaderMarkup = \markup
 
   \fill-line {
@@ -704,6 +710,26 @@ xVoice = \markup { \smaller \sans { x } } % print this by using '\xVoice'
     \context {
       \Voice
       \consists "Staff_performer"
+    }
+  }
+}
+
+%%% Performance Notes
+%%% @Section C.5
+\markup {
+  \override #'(line-width . 110)
+  \column {
+    \draw-hline
+    \abs-fontsize #18 {
+      \override #'(font-name . "Times Bold Italic") {
+        \italic "Performance Notes"
+      }
+    }
+    \fill-line {
+      \abs-fontsize #10 {
+        \override #'(font-name . "Times")
+        \wordwrap-string \defperformancenotes
+      }
     }
   }
 }
