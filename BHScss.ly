@@ -21,356 +21,6 @@ along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 %}
 \version "2.18.2"
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%
-%%% Define Header
-%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Lilypond will provide default values to any undefined header variables. If
-%% you do not want to display one of these values, assign it the empty string ("").
-%%
-%% Composer, Lyricist, and Arranger can be the same person. If this is the case,
-%% place their name in all relevant fields. Formatting will be handled for you.
-%%
-%% Any other required text modification will be handled automatically.
-
-%% Title of the Song
-deftitle = "Title"
-
-%% Subtitle
-defsubtitle = "Subtitle"
-
-%% Date, if public Domain
-defdate = "date"
-
-%% Composer
-defcomposer = "Composer Name"
-
-%% Lyricist(s)
-deflyricist = "Lyricist Name"
-
-%% Arranger
-defarranger = "Arranger Name"
-
-                                % TODO: Can this just take a copyright date and name and fill them in?
-%% Copyright
-% Bottom of first page. Add date and name.
-defcopyright = "This arrangement © 201_ SOMEONE. All Rights Reserved. No recording use, public performance for profit use or any other use requiring authorization, or reproduction or sale of copies in any form shall be made of or from this Arrangement unless licensed by the copyright owner or an agent or organization acting on behalf of the copyright owner."
-
-%% Tagline
-% Appears at the bottom of the last page.
-deftagline = "Questions about the contest suitability of this song/arrangement should be directed to the judging community and measured against current contest rules. Ask before you sing."
-
-%% Additional Information
-defadditionalinfo = "as sung by nobody, for no voices, from no known source"
-
-%% Performance Notes
-defperformancenotes = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed venenatis risus eu fermentum molestie. Aliquam orci felis, convallis et dictum ac, aliquet in justo. Duis rutrum elementum purus sit amet maximus. Pellentesque feugiat convallis velit, ac sodales sem molestie quis. Quisque vitae lectus risus. In hac habitasse platea dictumst. Donec porta consequat mauris, quis consectetur lacus consectetur ut. Sed massa leo, tempus sit amet lorem nec, luctus fermentum risus. Proin mi urna, posuere in purus ut, molestie finibus diam.
-
-
-Nam laoreet auctor felis eu interdum. Nulla sapien dui, elementum nec nisi consectetur, facilisis auctor purus. Fusce quis turpis massa. Aliquam fermentum dignissim tortor ac molestie. Phasellus lobortis consectetur ligula vel sagittis. Suspendisse id aliquet massa. Suspendisse a est est. Cras ut sapien tempor, dapibus ante fermentum, dictum tortor."
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%
-%%% Define global song attributes
-%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-global = {
-  %% Key Signature at the beginning of the piece. If it changes, it will be explicitly changed.
-  \key c \major
-
-  %% Time Signature
-  \time 4/4
-  \tempo 4=100
-
-                                % TODO: Can this be moved elsewhere and appended to global attributes later?
-%%%% STOP EDITING HERE
-  \set Score.tempoHideNote = ##t
-  \override Score.BarNumber.break-visibility = ##(#f #t #t)
-
-}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%
-%%% Tenor
-%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-tenorMusic = \relative c' {
-  |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-
-  \bar "|."
-}
-
-tenorWords = \lyricmode {
-
-}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%
-%%% Lead
-%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-leadMusic = \relative c' {
-  |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  \bar "|."
-}
-
-leadWords = \lyricmode {
-  Word word word word.
-  Word word word word.
-  Word word word word.
-  Word word word word.
-  Word word word word.
-  Word word word word.
-  Word word word word.
-  Word word word word.
-
-  Word word word word.
-  Word word word word.
-  Word word word word.
-  Word word word word.
-  Word word word word.
-  Word word word word.
-  Word word word word.
-  Word word word word.
-
-  Word word word word.
-  Word word word word.
-  Word word word word.
-  Word word word word.
-  Word word word word.
-  Word word word word.
-  Word word word word.
-  Word word word word.
-
-  Word word word word.
-  Word word word word.
-  Word word word word.
-  Word word word word.
-  Word word word word.
-  Word word word word.
-  Word word word word.
-  Word word word word.
-
-  Word word word word.
-  Word word word word.
-  Word word word word.
-  Word word word word.
-  Word word word word.
-  Word word word word.
-  Word word word word.
-  Word word word word.
-}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%
-%%% Baritone
-%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-bariMusic = \relative c' {
-  |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  \bar "|."
-}
-
-bariWords = \lyricmode {
-
-}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%
-%%% Bass
-%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-bassMusic = \relative c {
-  |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  \bar "|."
-}
-
-bassWords = \lyricmode {
-
-}
-
 %%%%%%%%%%%%%%%%%%%%%%%%% Do Not Edit Below This Line %%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -433,13 +83,22 @@ bassWords = \lyricmode {
   %% Everything else
   copyright = \defcopyright
   tagline = \deftagline
-                                % TODO: Space below instrument line needs to be larger
   instrument = \defadditionalinfo
 }
 
 %%% Set staff size to BHS Size:
 %%% @Section A.1.d.
 #(set-global-staff-size 20 )
+
+%%% Set score attributes
+scoreattributes = {
+  %%% Number every measure
+  %%% @Section A.12.a
+  \override Score.BarNumber.break-visibility = ##(#f #t #t)
+                                % TODO: When displaying tempo marking, force display of the measure number.
+                                % TODO: Fix vertical placement of measure numbers when tenor has lyrics
+}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%
@@ -494,8 +153,9 @@ absFontSize =
   line-width      = 7.375\in % 8.5 inch page width - ( inner-margin + outer-margin )
   last-bottom-spacing = 0.5\in
   ragged-last-bottom = ##t
-  markup-system-spacing.padding = #8
+  markup-system-spacing.padding = #1
   system-system-spacing.padding = #4
+  top-system-spacing.padding = #3
   max-systems-per-page = 5
 
   bookTitleMarkup = \markup {
@@ -534,19 +194,21 @@ absFontSize =
             }
           }
         }
+        \fill-line {
+          \abs-fontsize #10 {
+            \override #'(font-name . "Times Italic") {
+              \italic \fromproperty #'header:instrument
+            }
+          }
+        }
+        \strut
+        \strut
 %%% Lyricist's Name
 %%% @Section 7
         \fill-line {
           \abs-fontsize #12 {
             \override #'(font-name . "Times") {
               \fromproperty #'header:poet
-            }
-          }
-          {
-            \abs-fontsize #10 {
-              \override #'(font-name . "Times Italic") {
-                \italic \fromproperty #'header:instrument
-              }
             }
           } \abs-fontsize #12 {
             \override #'(font-name . "Times") {
@@ -590,7 +252,6 @@ absFontSize =
     }
   }
 
-                                % TODO: Increase space around title headers
   oddHeaderMarkup = \markup
 
   \fill-line {
@@ -640,7 +301,7 @@ xVoice = \markup { \smaller \sans { x } } % print this by using '\xVoice'
 {
   \new ChoirStaff <<
     \new Lyrics = "tenors" \with {
-      % this is needed for lyrics above a staff
+                                % this is needed for lyrics above a staff
       \override VerticalAxisGroup.staff-affinity = #DOWN
     }{ s1 }
     \new Staff = topstaff <<
@@ -652,21 +313,15 @@ xVoice = \markup { \smaller \sans { x } } % print this by using '\xVoice'
       \set Staff.shortInstrumentName = #""
       \clef "treble_8"
       \new Voice = "tenors" {
-        \voiceOne
-        <<
-          \global
-          \set midiInstrument = #"clarinet"
-          \tenorMusic
-        >>
+        \voiceOne << \global \scoreattributes \tenorMusic >>
       }
       \new Voice = "leads" {
-        \voiceTwo
-        << \global \leadMusic >>
+        \voiceTwo << \global \scoreattributes \leadMusic >>
       }
     >>
     \new Lyrics = "leads" { s1 }
     \new Lyrics = "baris" \with {
-      % this is needed for lyrics above a staff
+                                % this is needed for lyrics above a staff
       \override VerticalAxisGroup.staff-affinity = #DOWN
     } { s1 }
     \new Staff = bottomstaff <<
@@ -678,11 +333,10 @@ xVoice = \markup { \smaller \sans { x } } % print this by using '\xVoice'
       \set Staff.shortInstrumentName = #""
       \clef bass
       \new Voice = "baris" {
-        \voiceOne
-        << \global \bariMusic >>
+        \voiceOne << \global \scoreattributes \bariMusic >>
       }
       \new Voice = "basses" {
-        \voiceTwo << \global \bassMusic >>
+        \voiceTwo << \global \scoreattributes \bassMusic >>
       }
     >>
     \new Lyrics = basses { s1 }

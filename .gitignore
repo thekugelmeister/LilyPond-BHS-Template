@@ -51,3 +51,6 @@ $RECYCLE.BIN/
 *.msi
 *.msm
 *.msp
+
+# Specific File Exclusions
+bbOldManRiver.*
