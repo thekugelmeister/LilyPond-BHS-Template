@@ -4,6 +4,7 @@
 *.mid
 *.log
 *~
+*.ly
 
 # =========================
 # Operating System Files
@@ -17,8 +18,7 @@
 .LSOverride
 
 # Icon must end with two \r
-Icon
-
+Icon
 # Thumbnails
 ._*
 
@@ -52,5 +52,8 @@ $RECYCLE.BIN/
 *.msm
 *.msp
 
-# Specific File Exclusions
-bbOldManRiver.*
+
+# Specific File Inclusions
+
+!test1.ly
+!template.ly

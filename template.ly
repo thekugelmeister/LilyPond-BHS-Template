@@ -74,51 +74,6 @@ global = {
 
 tenorMusic = \relative c' {
   |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-  e4 e4 e4 e4 |
-
   \bar "|."
 }
 
@@ -134,98 +89,11 @@ tenorWords = \lyricmode {
 
 leadMusic = \relative c' {
   |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
   \bar "|."
 }
 
 leadWords = \lyricmode {
-  Word word word word.
-  Word word word word.
-  Word word word word.
-  Word word word word.
-  Word word word word.
-  Word word word word.
-  Word word word word.
-  Word word word word.
-
-  Word word word word.
-  Word word word word.
-  Word word word word.
-  Word word word word.
-  Word word word word.
-  Word word word word.
-  Word word word word.
-  Word word word word.
-
-  Word word word word.
-  Word word word word.
-  Word word word word.
-  Word word word word.
-  Word word word word.
-  Word word word word.
-  Word word word word.
-  Word word word word.
-
-  Word word word word.
-  Word word word word.
-  Word word word word.
-  Word word word word.
-  Word word word word.
-  Word word word word.
-  Word word word word.
-  Word word word word.
-
-  Word word word word.
-  Word word word word.
-  Word word word word.
-  Word word word word.
-  Word word word word.
-  Word word word word.
-  Word word word word.
-  Word word word word.
+  
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -236,50 +104,6 @@ leadWords = \lyricmode {
 
 bariMusic = \relative c' {
   |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
-  g4 g4 g4 g4 |
   \bar "|."
 }
 
@@ -295,50 +119,6 @@ bariWords = \lyricmode {
 
 bassMusic = \relative c {
   |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
-  c4 c4 c4 c4 |
   \bar "|."
 }
 

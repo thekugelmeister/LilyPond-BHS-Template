@@ -19,7 +19,7 @@ You should have received a copy of the GNU General Public License
 along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 
 %}
-\version "2.18.2"
+\version "2.19.49"
 
 %%%%%%%%%%%%%%%%%%%%%%%%% Do Not Edit Below This Line %%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -107,7 +107,7 @@ scoreattributes = {
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 allowGrobCallback =
-#(define-scheme-function (parser location syms) (symbol-list?)
+#(define-scheme-function (syms) (symbol-list?)
   (let ((interface (car syms))
         (sym (cadr syms)))
    #{
@@ -124,7 +124,7 @@ allowGrobCallback =
    #}))
 
 absFontSize =
-#(define-scheme-function (parser location pt)(number?)
+#(define-scheme-function (pt)(number?)
   (lambda (grob)
    (let* ((layout (ly:grob-layout grob))
           (ref-size (ly:output-def-lookup (ly:grob-layout grob) 'text-font-size 12)))
