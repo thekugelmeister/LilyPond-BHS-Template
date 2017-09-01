@@ -20,7 +20,7 @@ along with LilyPond Barbershop Template.  If not, see <http://www.gnu.org/licens
 
 This is a project to create a template for LilyPond to make engraved scores match the Barbershop Notation Manual. The Barbershop Notation Manual may be found at http://www.barbershop.org/files/documents/getandmakemusic/Barbershop%20Notation%20Manual.pdf
 
-NOTE: Currently using the 2013-07-11 revision. Will update to the 2015 version soon.
+Currently using the 2015-11-03 revision.
 
 LilyPond does a very nice job of producing scores correctly notated, but the Barbershop Harmony Society has requirements for publication to maintain a consistent appearance across arrangements.
 

@@ -23,6 +23,7 @@ along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 
 %%%%%%%%%%%%%%%%%%%%%%%%% Do Not Edit Below This Line %%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\pointAndClickOff
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%
@@ -95,8 +96,11 @@ scoreattributes = {
   %%% Number every measure
   %%% @Section A.12.a
   \override Score.BarNumber.break-visibility = ##(#f #t #t)
+  \override Score.BarNumber.self-alignment-X = #LEFT
                                 % TODO: When displaying tempo marking, force display of the measure number.
                                 % TODO: Fix vertical placement of measure numbers when tenor has lyrics
+                                % TODO: For first measure of every system, place measure number AFTER the key signature
+                                % TODO: Make sure measure numbers are in 10-point fixed Times New Roman
 }
 
 
