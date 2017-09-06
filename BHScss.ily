@@ -95,12 +95,15 @@ along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 scoreattributes = {
   %%% Number every measure
   %%% @Section A.12.a
-  \override Score.BarNumber.break-visibility = ##(#f #t #t)
-  \override Score.BarNumber.self-alignment-X = #LEFT
+  \override Staff.BarNumber.self-alignment-X = #LEFT
+  \override Staff.BarNumber.break-align-symbols = #'(key-signature)
+  \override Staff.BarNumber.extra-spacing-width = #'(0 . 1)
                                 % TODO: When displaying tempo marking, force display of the measure number.
-                                % TODO: Fix vertical placement of measure numbers when tenor has lyrics
-                                % TODO: For first measure of every system, place measure number AFTER the key signature
                                 % TODO: Make sure measure numbers are in 10-point fixed Times New Roman
+
+  %%% Format rehearsal marks
+  %%% @Section A.11.a
+  \override Score.RehearsalMark.self-alignment-X = #LEFT
 }
 
 
@@ -309,6 +312,7 @@ xVoice = \markup { \smaller \sans { x } } % print this by using '\xVoice'
       \override VerticalAxisGroup.staff-affinity = #DOWN
     }{ s1 }
     \new Staff = topstaff <<
+      \override Staff.BarNumber.break-visibility = ##(#f #t #t)
       \override Staff.InstrumentName.self-alignment-X = #LEFT
       \set Staff.instrumentName = \markup \left-column {
         "Tenor"
@@ -329,6 +333,7 @@ xVoice = \markup { \smaller \sans { x } } % print this by using '\xVoice'
       \override VerticalAxisGroup.staff-affinity = #DOWN
     } { s1 }
     \new Staff = bottomstaff <<
+      \override Staff.BarNumber.break-visibility = ##(#f #f #f)
       \override Staff.InstrumentName.self-alignment-X = #LEFT
       \set Staff.instrumentName = \markup \left-column {
         "Bari"
@@ -351,7 +356,12 @@ xVoice = \markup { \smaller \sans { x } } % print this by using '\xVoice'
   >>
   \layout {
     \context {
+      \Score
+      \remove Bar_number_engraver
+    }
+    \context {
       \Staff
+      \consists Bar_number_engraver
     }
     \context {
       \Lyrics
