@@ -27,6 +27,8 @@ along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 %%% Assemble the parts into a score
 %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% MIDI SCORE
 \score
 {
   \new ChoirStaff <<
@@ -39,7 +41,7 @@ along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
       \set Staff.shortInstrumentName = #""
       \clef \deffifthclef
       \new Voice = "fifth" {
-        \voiceOne << \global \scoreattributes \fifthMusic >>
+        \voiceOne << \global \scoreattributes \removeWithTag #'layout \fifthMusic >>
       }
     >>
     \new Lyrics = "fifth" { s1 }
@@ -57,10 +59,10 @@ along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
       \set Staff.shortInstrumentName = #""
       \clef "treble_8"
       \new Voice = "tenors" {
-        \voiceOne << \global \scoreattributes \tenorMusic >>
+        \voiceOne << \global \scoreattributes \removeWithTag #'layout \tenorMusic >>
       }
       \new Voice = "leads" {
-        \voiceTwo << \global \scoreattributes \leadMusic >>
+        \voiceTwo << \global \scoreattributes \removeWithTag #'layout \leadMusic >>
       }
     >>
     \new Lyrics = "leads" { s1 }
@@ -78,10 +80,88 @@ along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
       \set Staff.shortInstrumentName = #""
       \clef bass
       \new Voice = "baris" {
-        \voiceOne << \global \scoreattributes \bariMusic >>
+        \voiceOne << \global \scoreattributes \removeWithTag #'layout \bariMusic >>
       }
       \new Voice = "basses" {
-        \voiceTwo << \global \scoreattributes \bassMusic >>
+        \voiceTwo << \global \scoreattributes \removeWithTag #'layout \bassMusic >>
+      }
+    >>
+    \new Lyrics = basses { s1 }
+    \context Lyrics = fifth \lyricsto fifth \fifthWords
+    \context Lyrics = tenors \lyricsto tenors \tenorWords
+    \context Lyrics = leads \lyricsto leads \leadWords
+    \context Lyrics = baris \lyricsto baris \bariWords
+    \context Lyrics = basses \lyricsto basses \bassWords
+  >>
+  \midi {
+    midiChannelMapping = #'voice
+    \context {
+      \ChoirStaff
+      \remove "Staff_performer"
+    }
+    \context {
+      \Voice
+      \consists "Staff_performer"
+    }
+  }
+}
+
+%% LAYOUT SCORE
+\score
+{
+  \new ChoirStaff <<
+    \new Staff = fifthstaff <<
+      \override Staff.BarNumber.break-visibility = ##(#f #t #t)
+      \override Staff.InstrumentName.self-alignment-X = #LEFT
+      \set Staff.instrumentName = \markup \left-column {
+        "Fifth"
+      }
+      \set Staff.shortInstrumentName = #""
+      \clef \deffifthclef
+      \new Voice = "fifth" {
+        \voiceOne << \global \scoreattributes \removeWithTag #'midi \fifthMusic >>
+      }
+    >>
+    \new Lyrics = "fifth" { s1 }
+    \new Lyrics = "tenors" \with {
+                                % this is needed for lyrics above a staff
+      \override VerticalAxisGroup.staff-affinity = #DOWN
+    }{ s1 }
+    \new Staff = topstaff <<
+      \override Staff.BarNumber.break-visibility = ##(#f #t #t)
+      \override Staff.InstrumentName.self-alignment-X = #LEFT
+      \set Staff.instrumentName = \markup \left-column {
+        "Tenor"
+        "Lead"
+      }
+      \set Staff.shortInstrumentName = #""
+      \clef "treble_8"
+      \new Voice = "tenors" {
+        \voiceOne << \global \scoreattributes \removeWithTag #'midi \tenorMusic >>
+      }
+      \new Voice = "leads" {
+        \voiceTwo << \global \scoreattributes \removeWithTag #'midi \leadMusic >>
+      }
+    >>
+    \new Lyrics = "leads" { s1 }
+    \new Lyrics = "baris" \with {
+                                % this is needed for lyrics above a staff
+      \override VerticalAxisGroup.staff-affinity = #DOWN
+    } { s1 }
+    \new Staff = bottomstaff <<
+      \override Staff.BarNumber.break-visibility = ##(#f #f #f)
+      \override Staff.InstrumentName.self-alignment-X = #LEFT
+      \set Staff.instrumentName = \markup \left-column {
+        "Bari"
+        "Bass"
+      }
+      \set Staff.shortInstrumentName = #""
+      \clef bass
+      \new Voice = "baris" {
+        \voiceOne << \global \scoreattributes \removeWithTag #'midi \bariMusic >>
+      }
+      \new Voice = "basses" {
+        \voiceTwo << \global \scoreattributes \removeWithTag #'midi \bassMusic >>
       }
     >>
     \new Lyrics = basses { s1 }
@@ -104,17 +184,6 @@ along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
       \Lyrics
       \override LyricSpace.minimum-distance = #2.0
       \override LyricText.font-size = \absFontSize #11
-    }
-  }
-  \midi {
-    midiChannelMapping = #'voice
-    \context {
-      \ChoirStaff
-      \remove "Staff_performer"
-    }
-    \context {
-      \Voice
-      \consists "Staff_performer"
     }
   }
 }
