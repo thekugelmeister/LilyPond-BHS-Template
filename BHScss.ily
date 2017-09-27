@@ -104,6 +104,10 @@ scoreattributes = {
   %%% Format rehearsal marks
   %%% @Section A.11.a
   \override Score.RehearsalMark.self-alignment-X = #LEFT
+
+  %%% Set glissando style
+  %%% @Section B.17 (assumed from example; section not actually included)
+  \override Glissando.style = #'trill
 }
 
 
@@ -296,108 +300,3 @@ absFontSize =
 %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 xVoice = \markup { \smaller \sans { x } } % print this by using '\xVoice'
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%
-%%% Assemble the parts into a score
-%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\score
-{
-  \new ChoirStaff <<
-    \new Lyrics = "tenors" \with {
-                                % this is needed for lyrics above a staff
-      \override VerticalAxisGroup.staff-affinity = #DOWN
-    }{ s1 }
-    \new Staff = topstaff <<
-      \override Staff.BarNumber.break-visibility = ##(#f #t #t)
-      \override Staff.InstrumentName.self-alignment-X = #LEFT
-      \set Staff.instrumentName = \markup \left-column {
-        "Tenor"
-        "Lead"
-      }
-      \set Staff.shortInstrumentName = #""
-      \clef "treble_8"
-      \new Voice = "tenors" {
-        \voiceOne << \global \scoreattributes \tenorMusic >>
-      }
-      \new Voice = "leads" {
-        \voiceTwo << \global \scoreattributes \leadMusic >>
-      }
-    >>
-    \new Lyrics = "leads" { s1 }
-    \new Lyrics = "baris" \with {
-                                % this is needed for lyrics above a staff
-      \override VerticalAxisGroup.staff-affinity = #DOWN
-    } { s1 }
-    \new Staff = bottomstaff <<
-      \override Staff.BarNumber.break-visibility = ##(#f #f #f)
-      \override Staff.InstrumentName.self-alignment-X = #LEFT
-      \set Staff.instrumentName = \markup \left-column {
-        "Bari"
-        "Bass"
-      }
-      \set Staff.shortInstrumentName = #""
-      \clef bass
-      \new Voice = "baris" {
-        \voiceOne << \global \scoreattributes \bariMusic >>
-      }
-      \new Voice = "basses" {
-        \voiceTwo << \global \scoreattributes \bassMusic >>
-      }
-    >>
-    \new Lyrics = basses { s1 }
-    \context Lyrics = tenors \lyricsto tenors \tenorWords
-    \context Lyrics = leads \lyricsto leads \leadWords
-    \context Lyrics = baris \lyricsto baris \bariWords
-    \context Lyrics = basses \lyricsto basses \bassWords
-  >>
-  \layout {
-    \context {
-      \Score
-      \remove Bar_number_engraver
-    }
-    \context {
-      \Staff
-      \consists Bar_number_engraver
-    }
-    \context {
-      \Lyrics
-      \override LyricSpace.minimum-distance = #2.0
-      \override LyricText.font-size = \absFontSize #11
-    }
-  }
-  \midi {
-    midiChannelMapping = #'voice
-    \context {
-      \ChoirStaff
-      \remove "Staff_performer"
-    }
-    \context {
-      \Voice
-      \consists "Staff_performer"
-    }
-  }
-}
-
-%%% Performance Notes
-%%% @Section C.5
-\markup {
-  \override #'(line-width . 110)
-  \column {
-    \draw-hline
-    \abs-fontsize #18 {
-      \override #'(font-name . "Times Bold Italic") {
-        \italic "Performance Notes"
-      }
-    }
-    \fill-line {
-      \abs-fontsize #10 {
-        \override #'(font-name . "Times")
-        \wordwrap-string \defperformancenotes
-      }
-    }
-  }
-}

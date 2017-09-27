@@ -1,4 +1,5 @@
 \version "2.19.49"
+\include "bhs-markup.ily"
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%
@@ -64,6 +65,9 @@ global = {
 
   %% When false, displays tempo marking at beginning
   \set Score.tempoHideNote = ##f
+
+  %% Set the midi output to a non-default instrument
+  %% \set Staff.midiInstrument = #"voice oohs"
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -347,4 +351,4 @@ bassWords = \lyricmode {
 }
 
                                 % Include formatting file
-\include "BHScss.ily"
+\include "male4.ily"
