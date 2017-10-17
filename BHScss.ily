@@ -32,18 +32,17 @@ along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \header {
-                                % TODO: Currently, \caps does not seem to work for \fromproperty #'header:songtitle.
-                                % TODO: \caps is small-caps; want full caps.
-
   %% Title
   songtitle = \deftitle
   title= \markup {
-    \caps { \deftitle }
+    #(string-upcase deftitle)
   }
   %% Subtitle
   subtitle = #(if (string=? defsubtitle "")
                ""
-               #{ \markup { \concat { ( \caps { \defsubtitle } ) } } #})
+               (let ((capsub (string-upcase defsubtitle)))
+                #{ \markup { \concat { ( #capsub ) } } #}
+              ))
   %% Date
   subsubtitle = #(if (string=? defdate "")
                   ""
@@ -56,30 +55,30 @@ along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
       (define composer "")
       (if (string=? deflyricist "")
        (define poet "")
-       (define poet #{ \markup { Words by \caps { \deflyricist } } #}))
+       (define poet #{ \markup {Words by #(string-upcase deflyricist)} #}))
       (if (string=? defarranger "")
        (define arranger "")
-       (define arranger #{ \markup { Arrangement by \caps { \defarranger } } #})))
+       (define arranger #{ \markup {Arrangement by #} #(string-upcase defarranger)})))
      (if (string=? defcomposer deflyricist defarranger)
       (begin
        (define composer "Words, Music, and Arrangement")
-       (define arranger #{ \markup { by \caps { \defcomposer } } #})
+       (define arranger #{ \markup {by #(string-upcase defcomposer)} #})
        (define poet ""))
       (if (string=? defcomposer deflyricist)
        (begin
         (define arranger "")
-        (define poet #{ \markup { Words and Music by \caps { \defcomposer } } #})
+        (define poet #{ \markup {Words and Music by #(string-upcase defcomposer)} #})
         (if (string=? defarranger "")
          (define composer "")
-         (define composer #{ \markup { Arrangement by \caps { \defarranger } } #})))
+         (define composer #{ \markup {Arrangement by #(string-upcase defarranger)} #})))
        (begin
-        (define composer #{ \markup { Music by \caps { \defcomposer } } #})
+        (define composer #{ \markup {Music by #(string-upcase defcomposer)} #})
         (if (string=? deflyricist "")
          (define poet "")
-         (define poet #{ \markup { Words by \caps { \deflyricist } } #}))
+         (define poet #{ \markup {Words by #(string-upcase deflyricist)} #}))
         (if (string=? defarranger "")
          (define arranger "")
-         (define arranger #{ \markup { Arrangement by \caps { \defarranger } } #})))))))
+         (define arranger #{ \markup {Arrangement by #(string-upcase defarranger)} #})))))))
 
   %% Everything else
   copyright = \defcopyright
@@ -115,25 +114,6 @@ perfnotes = #(if (string=? defperformancenotes "")
 %%% @Section A.1.d.
 #(set-global-staff-size 20 )
 
-%%% Set score attributes
-scoreattributes = {
-  %%% Number every measure
-  %%% @Section A.12.a
-  \override Staff.BarNumber.self-alignment-X = #LEFT
-  \override Staff.BarNumber.break-align-symbols = #'(key-signature)
-  \override Staff.BarNumber.extra-spacing-width = #'(0 . 1)
-                                % TODO: When displaying tempo marking, force display of the measure number.
-                                % TODO: Make sure measure numbers are in 10-point fixed Times New Roman
-
-  %%% Format rehearsal marks
-  %%% @Section A.11.a
-  \override Score.RehearsalMark.self-alignment-X = #LEFT
-
-  %%% Set glissando style
-  %%% @Section B.17 (assumed from example; section not actually included)
-  \override Glissando.style = #'trill
-}
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%
@@ -168,6 +148,54 @@ absFontSize =
  )
 )
 
+%% Following functions modified from souce to accept strings from fields:
+%% http://lsr.di.unimi.it/LSR/Item?id=765
+%% see also http://lilypond.org/doc/v2.18/Documentation/notation/formatting-text
+%% see also http://lilypond.org/doc/v2.18/Documentation/snippets/text
+                                % Defines right-aligned and centered long text with the possibility to set the baseline-skip as required.
+                                % Code is taken from ./scm/define-mark-up-commands.scm and just slightly modified.
+                                % Author: harm6 from the german lilypondforum
+
+#(define (general-column align-dir baseline mols)
+  (let* ((aligned-mols (map (lambda (x) (ly:stencil-aligned-to x X align-dir)) mols)))
+   (stack-lines -1 0.0 baseline aligned-mols)))
+
+#(define-markup-command (textCenter layout props symbol)(symbol?)
+  #:properties ((baseline-skip))
+  (let* ((m (chain-assoc-get symbol props)))
+   (if (string? m)
+    (general-column CENTER baseline-skip (wordwrap-string-internal-markup-list layout props #f m))
+    empty-stencil)))
+
+%%% Define new bar number translation function with desired functionality
+#(define-public (first-bar-number-visible-and-no-parenthesized-bar-numbers barnum mp)
+  (= (ly:moment-main-numerator mp) 0))
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%
+%%% Score Attributes
+%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% Set score attributes
+scoreattributes = {
+  %%% Number every measure
+  %%% @Section A.12.a
+  \override Staff.BarNumber.self-alignment-X = #LEFT
+  \override Score.TimeSignature.break-align-anchor-alignment = #RIGHT
+  \override Staff.BarNumber.break-align-symbols = #'(time-signature key-signature)
+  \override Staff.BarNumber.extra-spacing-width = #'(0 . 1)
+  \override Staff.BarNumber.font-name = "Times"                                  % TODO: Make sure measure numbers are 10-point fixed size
+  \set Score.barNumberVisibility = #first-bar-number-visible-and-no-parenthesized-bar-numbers
+
+  %%% Format rehearsal marks
+  %%% @Section A.11.a
+  \override Score.RehearsalMark.self-alignment-X = #LEFT
+
+  %%% Set glissando style
+  %%% @Section B.17 (assumed from example; section not actually included)
+  \override Glissando.style = #'trill
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%
@@ -259,7 +287,6 @@ absFontSize =
     }
   }
 
-                                % TODO: Center copyright
                                 % TODO: Why does oddFooterMarkup work for even pages too?
   oddFooterMarkup = \markup {
     \column {
@@ -271,7 +298,7 @@ absFontSize =
           \abs-fontsize #9 {
             \override #'(line-width . 110)
             \override #'(font-name . "Times")
-            \wordwrap-field #'header:copyright
+            \textCenter #'header:copyright
           }
         }
       }

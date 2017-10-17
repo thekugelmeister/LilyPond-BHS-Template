@@ -110,10 +110,10 @@ along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
       \set Staff.shortInstrumentName = #""
       \clef "treble_8"
       \new Voice = "tenors" {
-        \voiceOne << \global \scoreattributes \removeWithTag #'midi \tenorMusic >>
+        \voiceOne << \global \scoreattributes {\bar ""} \removeWithTag #'midi \tenorMusic >>
       }
       \new Voice = "leads" {
-        \voiceTwo << \global \scoreattributes \removeWithTag #'midi \leadMusic >>
+        \voiceTwo << \global \scoreattributes {\bar ""} \removeWithTag #'midi \leadMusic >>
       }
     >>
     \new Lyrics = "leads" { s1 }
@@ -131,10 +131,10 @@ along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
       \set Staff.shortInstrumentName = #""
       \clef bass
       \new Voice = "baris" {
-        \voiceOne << \global \scoreattributes \removeWithTag #'midi \bariMusic >>
+        \voiceOne << \global \scoreattributes {\bar ""} \removeWithTag #'midi \bariMusic >>
       }
       \new Voice = "basses" {
-        \voiceTwo << \global \scoreattributes \removeWithTag #'midi \bassMusic >>
+        \voiceTwo << \global \scoreattributes {\bar ""} \removeWithTag #'midi \bassMusic >>
       }
     >>
     \new Lyrics = basses { s1 }
