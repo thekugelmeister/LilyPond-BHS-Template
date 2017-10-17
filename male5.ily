@@ -188,22 +188,4 @@ along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
   }
 }
 
-%%% Performance Notes
-%%% @Section C.5
-\markup {
-  \override #'(line-width . 110)
-  \column {
-    \draw-hline
-    \abs-fontsize #18 {
-      \override #'(font-name . "Times Bold Italic") {
-        \italic "Performance Notes"
-      }
-    }
-    \fill-line {
-      \abs-fontsize #10 {
-        \override #'(font-name . "Times")
-        \wordwrap-string \defperformancenotes
-      }
-    }
-  }
-}
+\perfnotes
