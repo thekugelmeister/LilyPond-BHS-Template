@@ -180,12 +180,14 @@ absFontSize =
 %%% Set score attributes
 scoreattributes = {
   %%% Number every measure
-  %%% @Section A.12.a
-  \override Staff.BarNumber.self-alignment-X = #LEFT
+  %%% @Section A.12
+  \override Score.BarNumber.self-alignment-X = #LEFT
   \override Score.TimeSignature.break-align-anchor-alignment = #RIGHT
-  \override Staff.BarNumber.break-align-symbols = #'(time-signature key-signature)
-  \override Staff.BarNumber.extra-spacing-width = #'(0 . 1)
-  \override Staff.BarNumber.font-name = "Times"                                  % TODO: Make sure measure numbers are 10-point fixed size
+  \override Score.BarNumber.break-align-symbols = #'(time-signature key-signature)
+  \override Score.BarNumber.extra-spacing-width = #'(0 . 1)
+  \override Score.BarNumber.font-name = "Times"
+  \override Score.BarNumber.font-size = \absFontSize #10
+  \override Score.BarNumber.break-visibility = ##(#f #t #t)
   \set Score.barNumberVisibility = #first-bar-number-visible-and-no-parenthesized-bar-numbers
 
   %%% Format rehearsal marks
@@ -194,7 +196,11 @@ scoreattributes = {
 
   %%% Set glissando style
   %%% @Section B.17 (assumed from example; section not actually included)
-  \override Glissando.style = #'trill
+  \override Score.Glissando.style = #'trill
+
+  %%% Align instrument name correctly
+  %%% @Section A.1.b
+  \override Score.InstrumentName.self-alignment-X = #LEFT
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -220,6 +226,9 @@ scoreattributes = {
   system-system-spacing.padding = #4
   top-system-spacing.padding = #3
   max-systems-per-page = 5
+                                % TODO: Code a solution to specifying min systems for first page
+                                % Long story short, the optimal-breaking algorithm has to apply to every page. First page can have 3-4 systems. Other pages can have 4-5 systems. Leaving this out for now because it becomes unreadable sometimes otherwise.
+  % min-systems-per-page = 4
 
   bookTitleMarkup = \markup {
     \override #'(baseline-skip . 3.5)
