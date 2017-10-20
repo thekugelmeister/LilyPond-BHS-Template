@@ -201,6 +201,9 @@ scoreattributes = {
   %%% Align instrument name correctly
   %%% @Section A.1.b
   \override Score.InstrumentName.self-alignment-X = #LEFT
+
+  %%% Optionally display tempo marking based on user specification
+  \set Score.tempoHideNote = \hidetempomarking
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

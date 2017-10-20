@@ -44,10 +44,20 @@ deftagline = "Questions about the contest suitability of this song/arrangement s
 defadditionalinfo = "as sung by nobody, for no voices, from no known source"
 
 %% Performance Notes
-defperformancenotes = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed venenatis risus eu fermentum molestie. Aliquam orci felis, convallis et dictum ac, aliquet in justo. Duis rutrum elementum purus sit amet maximus. Pellentesque feugiat convallis velit, ac sodales sem molestie quis. Quisque vitae lectus risus. In hac habitasse platea dictumst. Donec porta consequat mauris, quis consectetur lacus consectetur ut. Sed massa leo, tempus sit amet lorem nec, luctus fermentum risus. Proin mi urna, posuere in purus ut, molestie finibus diam.
+defperformancenotes = ""
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%
+%%% Layout options
+%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Nam laoreet auctor felis eu interdum. Nulla sapien dui, elementum nec nisi consectetur, facilisis auctor purus. Fusce quis turpis massa. Aliquam fermentum dignissim tortor ac molestie. Phasellus lobortis consectetur ligula vel sagittis. Suspendisse id aliquet massa. Suspendisse a est est. Cras ut sapien tempor, dapibus ante fermentum, dictum tortor."
+%% When false, displays tempo marking at beginning
+hidetempomarking = ##f
+
+%% Set the MIDI output instrument (lilypond default: acoustic grand).
+%% See http://lilypond.org/doc/Documentation/notation/midi-instruments for a complete list.
+midiinstrument = #"voice oohs"
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%
@@ -62,12 +72,6 @@ global = {
   %% Time Signature
   \time 4/4
   \tempo 4=100
-
-  %% When false, displays tempo marking at beginning
-  \set Score.tempoHideNote = ##f
-
-  %% Set the midi output to a non-default instrument
-  %% \set Staff.midiInstrument = #"voice oohs"
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

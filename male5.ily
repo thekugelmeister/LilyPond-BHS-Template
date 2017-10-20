@@ -31,27 +31,22 @@ along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 %% MIDI SCORE
 \score
 {
-  \new ChoirStaff <<
+  \new ChoirStaff \with { midiInstrument = \midiinstrument } <<
     \new Staff = fifthstaff <<
-      \override Staff.BarNumber.break-visibility = ##(#f #t #t)
-      \override Staff.InstrumentName.self-alignment-X = #LEFT
+      \global
       \set Staff.instrumentName = \markup \left-column {
         "Fifth"
       }
       \set Staff.shortInstrumentName = #""
       \clef \deffifthclef
       \new Voice = "fifth" {
-        \voiceOne << \global \scoreattributes \removeWithTag #'layout \fifthMusic >>
+        \voiceOne << \removeWithTag #'layout \fifthMusic >>
       }
     >>
     \new Lyrics = "fifth" { s1 }
-    \new Lyrics = "tenors" \with {
-                                % this is needed for lyrics above a staff
-      \override VerticalAxisGroup.staff-affinity = #DOWN
-    }{ s1 }
+    \new Lyrics = "tenors" { s1 }
     \new Staff = topstaff <<
-      \override Staff.BarNumber.break-visibility = ##(#f #t #t)
-      \override Staff.InstrumentName.self-alignment-X = #LEFT
+      \global
       \set Staff.instrumentName = \markup \left-column {
         "Tenor"
         "Lead"
@@ -59,20 +54,16 @@ along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
       \set Staff.shortInstrumentName = #""
       \clef "treble_8"
       \new Voice = "tenors" {
-        \voiceOne << \global \scoreattributes \removeWithTag #'layout \tenorMusic >>
+        \voiceOne << \removeWithTag #'layout \tenorMusic >>
       }
       \new Voice = "leads" {
-        \voiceTwo << \global \scoreattributes \removeWithTag #'layout \leadMusic >>
+        \voiceTwo << \removeWithTag #'layout \leadMusic >>
       }
     >>
     \new Lyrics = "leads" { s1 }
-    \new Lyrics = "baris" \with {
-                                % this is needed for lyrics above a staff
-      \override VerticalAxisGroup.staff-affinity = #DOWN
-    } { s1 }
+    \new Lyrics = "baris" { s1 }
     \new Staff = bottomstaff <<
-      \override Staff.BarNumber.break-visibility = ##(#f #f #f)
-      \override Staff.InstrumentName.self-alignment-X = #LEFT
+      \global
       \set Staff.instrumentName = \markup \left-column {
         "Bari"
         "Bass"
@@ -80,10 +71,10 @@ along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
       \set Staff.shortInstrumentName = #""
       \clef bass
       \new Voice = "baris" {
-        \voiceOne << \global \scoreattributes \removeWithTag #'layout \bariMusic >>
+        \voiceOne << \removeWithTag #'layout \bariMusic >>
       }
       \new Voice = "basses" {
-        \voiceTwo << \global \scoreattributes \removeWithTag #'layout \bassMusic >>
+        \voiceTwo << \removeWithTag #'layout \bassMusic >>
       }
     >>
     \new Lyrics = basses { s1 }
@@ -111,15 +102,14 @@ along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 {
   \new ChoirStaff <<
     \new Staff = fifthstaff <<
-      \override Staff.BarNumber.break-visibility = ##(#f #t #t)
-      \override Staff.InstrumentName.self-alignment-X = #LEFT
+      \global
       \set Staff.instrumentName = \markup \left-column {
         "Fifth"
       }
       \set Staff.shortInstrumentName = #""
       \clef \deffifthclef
       \new Voice = "fifth" {
-        \voiceOne << \global \scoreattributes \removeWithTag #'midi \fifthMusic >>
+        \voiceOne << \removeWithTag #'midi \fifthMusic >>
       }
     >>
     \new Lyrics = "fifth" { s1 }
@@ -128,8 +118,7 @@ along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
       \override VerticalAxisGroup.staff-affinity = #DOWN
     }{ s1 }
     \new Staff = topstaff <<
-      \override Staff.BarNumber.break-visibility = ##(#f #t #t)
-      \override Staff.InstrumentName.self-alignment-X = #LEFT
+      \global
       \set Staff.instrumentName = \markup \left-column {
         "Tenor"
         "Lead"
@@ -137,10 +126,10 @@ along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
       \set Staff.shortInstrumentName = #""
       \clef "treble_8"
       \new Voice = "tenors" {
-        \voiceOne << \global \scoreattributes {\bar ""} \removeWithTag #'midi \tenorMusic >>
+        \voiceOne << {\bar ""} \removeWithTag #'midi \tenorMusic >>
       }
       \new Voice = "leads" {
-        \voiceTwo << \global \scoreattributes {\bar ""} \removeWithTag #'midi \leadMusic >>
+        \voiceTwo << {\bar ""} \removeWithTag #'midi \leadMusic >>
       }
     >>
     \new Lyrics = "leads" { s1 }
@@ -149,8 +138,9 @@ along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
       \override VerticalAxisGroup.staff-affinity = #DOWN
     } { s1 }
     \new Staff = bottomstaff <<
+      \global
+                                % No bar numbers on bottom staff
       \override Staff.BarNumber.break-visibility = ##(#f #f #f)
-      \override Staff.InstrumentName.self-alignment-X = #LEFT
       \set Staff.instrumentName = \markup \left-column {
         "Bari"
         "Bass"
@@ -158,10 +148,10 @@ along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
       \set Staff.shortInstrumentName = #""
       \clef bass
       \new Voice = "baris" {
-        \voiceOne << \global \scoreattributes {\bar ""} \removeWithTag #'midi \bariMusic >>
+        \voiceOne << {\bar ""} \removeWithTag #'midi \bariMusic >>
       }
       \new Voice = "basses" {
-        \voiceTwo << \global \scoreattributes {\bar ""} \removeWithTag #'midi \bassMusic >>
+        \voiceTwo << {\bar ""} \removeWithTag #'midi \bassMusic >>
       }
     >>
     \new Lyrics = basses { s1 }
@@ -174,6 +164,7 @@ along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
   \layout {
     \context {
       \Score
+      \scoreattributes
       \remove Bar_number_engraver
     }
     \context {

@@ -22,6 +22,11 @@ along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 \version "2.19.49"
 \include "BHScss.ily"
 
+                                % TODO: Variable part numbers
+                                % TODO: Variable part names/labels
+                                % TODO: Variable part clefs/attributes/etc.
+                                % TODO: Properly display voice splits on a single staff
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%
 %%% Assemble the parts into a score
@@ -87,53 +92,80 @@ along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 %% LAYOUT SCORE
 \score
 {
-  \new ChoirStaff <<
-    \new Lyrics = "tenors" \with {
-                                % this is needed for lyrics above a staff
-      \override VerticalAxisGroup.staff-affinity = #DOWN
-    }{ s1 }
-    \new Staff = topstaff <<
-      \global
-      \set Staff.instrumentName = \markup \left-column {
-        "Tenor"
-        "Lead"
-      }
-      \set Staff.shortInstrumentName = #""
-      \clef "treble_8"
-      \new Voice = "tenors" {
-        \voiceOne << {\bar ""} \removeWithTag #'midi \tenorMusic >>
-      }
-      \new Voice = "leads" {
-        \voiceTwo << {\bar ""} \removeWithTag #'midi \leadMusic >>
-      }
+  <<
+    \new ChoirStaff <<
+      \new Staff = staffa <<
+        \global
+        \set Staff.instrumentName = \markup \left-column {
+          "Tenor"
+        }
+        \set Staff.shortInstrumentName = #""
+        \clef "treble_8"
+        \new Voice = "tenors" {
+          \voiceOne << {\bar ""} \removeWithTag #'midi \tenorMusic >>
+        }
+      >>
+      \new Lyrics = "tenors" { s1 }
+      \new Staff = staffb <<
+        \global
+        \override Staff.BarNumber.break-visibility = ##(#f #f #f)
+        \set Staff.instrumentName = \markup \left-column {
+          "Lead"
+        }
+        \set Staff.shortInstrumentName = #""
+        \clef "treble_8"
+        \new Voice = "leads" {
+          \voiceOne << {\bar ""} \removeWithTag #'midi \leadMusic >>
+        }
+      >>
+      \new Lyrics = "leads" { s1 }
+      \new Staff = staffc <<
+        \global
+        \override Staff.BarNumber.break-visibility = ##(#f #f #f)
+        \set Staff.instrumentName = \markup \left-column {
+          "Bari"
+        }
+        \set Staff.shortInstrumentName = #""
+        \clef bass
+        \new Voice = "baris" {
+          \voiceOne << {\bar ""} \removeWithTag #'midi \bariMusic >>
+        }
+      >>
+      \new Lyrics = "baris" { s1 }
+      \new Staff = staffd <<
+        \global
+        \override Staff.BarNumber.break-visibility = ##(#f #f #f)
+        \set Staff.instrumentName = \markup \left-column {
+          "Bass"
+        }
+        \set Staff.shortInstrumentName = #""
+        \clef bass
+        \new Voice = "basses" {
+          \voiceOne << {\bar ""} \removeWithTag #'midi \bassMusic >>
+        }
+      >>
+      \new Lyrics = basses { s1 }
+      \context Lyrics = tenors \lyricsto tenors \tenorWords
+      \context Lyrics = leads \lyricsto leads \leadWords
+      \context Lyrics = baris \lyricsto baris \bariWords
+      \context Lyrics = basses \lyricsto basses \bassWords
     >>
-    \new Lyrics = "leads" { s1 }
-    \new Lyrics = "baris" \with {
-                                % this is needed for lyrics above a staff
-      \override VerticalAxisGroup.staff-affinity = #DOWN
-    } { s1 }
-    \new Staff = bottomstaff <<
-      \global
-                                % No bar numbers on bottom staff
-      \override Staff.BarNumber.break-visibility = ##(#f #f #f)
-      \set Staff.instrumentName = \markup \left-column {
-        "Bari"
-        "Bass"
-      }
-      \set Staff.shortInstrumentName = #""
-      \clef bass
-      \new Voice = "baris" {
-        \voiceOne << {\bar ""} \removeWithTag #'midi \bariMusic >>
-      }
-      \new Voice = "basses" {
-        \voiceTwo << {\bar ""} \removeWithTag #'midi \bassMusic >>
-      }
+    \new PianoStaff \with { printPartCombineTexts = ##f } <<
+      \new Staff <<
+        \global
+        \partcombine
+        << {\bar ""} \removeWithTag #'midi \tenorMusic >>
+        << {\bar ""} \removeWithTag #'midi \leadMusic >>
+      >>
+      \new Staff <<
+        \global
+        \override Staff.BarNumber.break-visibility = ##(#f #f #f)
+        \clef bass
+        \partcombine
+        << {\bar ""} \removeWithTag #'midi \bariMusic >>
+        << {\bar ""} \removeWithTag #'midi \bassMusic >>
+      >>
     >>
-    \new Lyrics = basses { s1 }
-    \context Lyrics = tenors \lyricsto tenors \tenorWords
-    \context Lyrics = leads \lyricsto leads \leadWords
-    \context Lyrics = baris \lyricsto baris \bariWords
-    \context Lyrics = basses \lyricsto basses \bassWords
   >>
   \layout {
     \context {
