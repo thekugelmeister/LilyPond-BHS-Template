@@ -218,7 +218,16 @@ scoreattributes = {
 %%% @Section 2
 %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Set page breaking based on whether this piece is a tag
+pgbrk = #(if tagpage
+          ly:one-page-breaking
+          ly:optimal-breaking
+        )
+
 \paper {
+  page-breaking = \pgbrk
+
   #(set-paper-size "letter")
   bottom-margin   = 0.50\in
   top-margin      = 0.50\in

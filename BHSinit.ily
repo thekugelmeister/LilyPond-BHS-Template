@@ -72,7 +72,10 @@ defperformancenotes = ""
 %% these variables to affect output, or leave as default.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%% When false, displays tempo marking at beginning
+%% When true, sizes a single page to fit music. Intended for tags.
+tagpage = ##f
+
+%% When true, hides tempo marking at beginning
 hidetempomarking = ##t
 
 %% Set the MIDI output instrument (lilypond default: acoustic grand).
