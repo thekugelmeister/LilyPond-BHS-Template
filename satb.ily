@@ -22,10 +22,10 @@ along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 \version "2.19.49"
 \include "BHScss.ily"
 
-                                % TODO: Variable part numbers
-                                % TODO: Variable part names/labels
-                                % TODO: Variable part clefs/attributes/etc.
+                                % TODO: Variable part numbers?
+                                % TODO: Variable part names/labels?
                                 % TODO: Properly display voice splits on a single staff
+                                % TODO: Variable display of piano reduction
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%
@@ -37,43 +37,41 @@ along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 \score
 {
   \new ChoirStaff \with { midiInstrument = \midiinstrument } <<
-    \new Lyrics = "tenors" { s1 }
+    \new Lyrics = "sopranos" { s1 }
     \new Staff = topstaff <<
       \global
       \set Staff.instrumentName = \markup \left-column {
-        "Tenor"
-        "Lead"
+        "Soprano"
+        "Alto"
       }
       \set Staff.shortInstrumentName = #""
-      \clef "treble_8"
-      \new Voice = "tenors" {
-        \voiceOne << \removeWithTag #'layout \tenorMusic >>
+      \new Voice = "sopranos" {
+        \voiceOne << \removeWithTag #'layout \sopMusic >>
       }
-      \new Voice = "leads" {
-        \voiceTwo << \removeWithTag #'layout \leadMusic >>
+      \new Voice = "altos" {
+        \voiceTwo << \removeWithTag #'layout \altoMusic >>
       }
     >>
-    \new Lyrics = "leads" { s1 }
-    \new Lyrics = "baris" { s1 }
+    \new Lyrics = "altos" { s1 }
+    \new Lyrics = "tenors" { s1 }
     \new Staff = bottomstaff <<
       \global
       \set Staff.instrumentName = \markup \left-column {
-        "Bari"
+        "Tenor"
         "Bass"
       }
       \set Staff.shortInstrumentName = #""
-      \clef bass
-      \new Voice = "baris" {
-        \voiceOne << \removeWithTag #'layout \bariMusic >>
+      \new Voice = "tenors" {
+        \voiceOne << \removeWithTag #'layout \tenorMusic >>
       }
       \new Voice = "basses" {
         \voiceTwo << \removeWithTag #'layout \bassMusic >>
       }
     >>
     \new Lyrics = basses { s1 }
+    \context Lyrics = sopranos \lyricsto sopranos \sopWords
+    \context Lyrics = altos \lyricsto altos \altoWords
     \context Lyrics = tenors \lyricsto tenors \tenorWords
-    \context Lyrics = leads \lyricsto leads \leadWords
-    \context Lyrics = baris \lyricsto baris \bariWords
     \context Lyrics = basses \lyricsto basses \bassWords
   >>
   \midi {
@@ -97,41 +95,38 @@ along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
       \new Staff = staffa <<
         \global
         \set Staff.instrumentName = \markup \left-column {
+          "Soprano"
+        }
+        \set Staff.shortInstrumentName = #""
+        \new Voice = "sopranos" {
+          \voiceOne << {\bar ""} \removeWithTag #'midi \sopMusic >>
+        }
+      >>
+      \new Lyrics = "sopranos" { s1 }
+      \new Staff = staffb <<
+        \global
+        \override Staff.BarNumber.break-visibility = ##(#f #f #f)
+        \set Staff.instrumentName = \markup \left-column {
+          "Alto"
+        }
+        \set Staff.shortInstrumentName = #""
+        \new Voice = "altos" {
+          \voiceOne << {\bar ""} \removeWithTag #'midi \altoMusic >>
+        }
+      >>
+      \new Lyrics = "altos" { s1 }
+      \new Staff = staffc <<
+        \global
+        \override Staff.BarNumber.break-visibility = ##(#f #f #f)
+        \set Staff.instrumentName = \markup \left-column {
           "Tenor"
         }
         \set Staff.shortInstrumentName = #""
-        \clef "treble_8"
         \new Voice = "tenors" {
           \voiceOne << {\bar ""} \removeWithTag #'midi \tenorMusic >>
         }
       >>
       \new Lyrics = "tenors" { s1 }
-      \new Staff = staffb <<
-        \global
-        \override Staff.BarNumber.break-visibility = ##(#f #f #f)
-        \set Staff.instrumentName = \markup \left-column {
-          "Lead"
-        }
-        \set Staff.shortInstrumentName = #""
-        \clef "treble_8"
-        \new Voice = "leads" {
-          \voiceOne << {\bar ""} \removeWithTag #'midi \leadMusic >>
-        }
-      >>
-      \new Lyrics = "leads" { s1 }
-      \new Staff = staffc <<
-        \global
-        \override Staff.BarNumber.break-visibility = ##(#f #f #f)
-        \set Staff.instrumentName = \markup \left-column {
-          "Bari"
-        }
-        \set Staff.shortInstrumentName = #""
-        \clef bass
-        \new Voice = "baris" {
-          \voiceOne << {\bar ""} \removeWithTag #'midi \bariMusic >>
-        }
-      >>
-      \new Lyrics = "baris" { s1 }
       \new Staff = staffd <<
         \global
         \override Staff.BarNumber.break-visibility = ##(#f #f #f)
@@ -139,30 +134,28 @@ along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
           "Bass"
         }
         \set Staff.shortInstrumentName = #""
-        \clef bass
         \new Voice = "basses" {
           \voiceOne << {\bar ""} \removeWithTag #'midi \bassMusic >>
         }
       >>
       \new Lyrics = basses { s1 }
+      \context Lyrics = sopranos \lyricsto sopranos \sopWords
+      \context Lyrics = altos \lyricsto altos \altoWords
       \context Lyrics = tenors \lyricsto tenors \tenorWords
-      \context Lyrics = leads \lyricsto leads \leadWords
-      \context Lyrics = baris \lyricsto baris \bariWords
       \context Lyrics = basses \lyricsto basses \bassWords
     >>
     \new PianoStaff \with { printPartCombineTexts = ##f } <<
       \new Staff <<
         \global
         \partcombine
-        << {\bar ""} \removeWithTag #'midi \tenorMusic >>
-        << {\bar ""} \removeWithTag #'midi \leadMusic >>
+        << {\bar ""} \removeWithTag #'midi \sopMusic >>
+        << {\bar ""} \removeWithTag #'midi \altoMusic >>
       >>
       \new Staff <<
         \global
         \override Staff.BarNumber.break-visibility = ##(#f #f #f)
-        \clef bass
         \partcombine
-        << {\bar ""} \removeWithTag #'midi \bariMusic >>
+        << {\bar ""} \removeWithTag #'midi \tenorMusic >>
         << {\bar ""} \removeWithTag #'midi \bassMusic >>
       >>
     >>

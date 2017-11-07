@@ -21,6 +21,8 @@ along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 %}
 \version "2.19.49"
 
+                                % TODO: add an option for tag-sized pdf?
+
 %%%%%%%%%%%%%%%%%%%%%%%%% Do Not Edit Below This Line %%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \pointAndClickOff
@@ -228,10 +230,12 @@ scoreattributes = {
   markup-system-spacing.padding = #1
   system-system-spacing.padding = #4
   top-system-spacing.padding = #3
-  max-systems-per-page = 5
-                                % TODO: Code a solution to specifying min systems for first page
-                                % Long story short, the optimal-breaking algorithm has to apply to every page. First page can have 3-4 systems. Other pages can have 4-5 systems. Leaving this out for now because it becomes unreadable sometimes otherwise.
   % min-systems-per-page = 4
+  max-systems-per-page = 5
+                                % TODO: Code a solution to specifying max systems for first page
+                                % Long story short, the optimal-breaking algorithm has to apply to every page. First page can have 3-4 systems. Other pages can have 4-5 systems. Leaving this out for now because it becomes unreadable sometimes otherwise.
+  % max-systems-first-page = 4
+  % min-systems-first-page = 3
 
   bookTitleMarkup = \markup {
     \override #'(baseline-skip . 3.5)
