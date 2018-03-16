@@ -1,6 +1,12 @@
 \version "2.19.49"
 \include "BHSinit.ily"
 
+global = {
+  \key c \major
+  \time 4/4
+  \tempo 4=100
+}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%
 %%% Tenor
@@ -61,5 +67,7 @@ bassWords = \lyricmode {
 
 }
 
-                                % Include formatting file
+                                % Include formatting files
 \include "BHSmale4.ily"
+                                % \include "BHSmale4-solomidi.ily"
+                                % \include "BHSmale4-3partmidi.ily"

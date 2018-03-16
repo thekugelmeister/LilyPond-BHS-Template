@@ -101,6 +101,7 @@ along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 \score
 {
   \new ChoirStaff <<
+    \new ChordNames \displayChords
     \new Staff = fifthstaff <<
       \global
       \set Staff.instrumentName = \markup \left-column {

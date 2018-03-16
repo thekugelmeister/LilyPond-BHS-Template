@@ -21,7 +21,8 @@ along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 %}
 \version "2.19.49"
 
-                                % TODO: add an option for tag-sized pdf?
+                                % TODO: Find a way to output solo part midi files
+                                % TODO: Find a way to end lyric extenders when they are followed immediately by lyric skips.
 
 %%%%%%%%%%%%%%%%%%%%%%%%% Do Not Edit Below This Line %%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -88,6 +89,7 @@ along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
   instrument = \defadditionalinfo
 }
 
+                                % TODO: Figure out how to put line breaks into the performance notes correctly so that there is space between paragraphs
 %%% Performance Notes
 %%% @Section C.5
 perfnotes = #(if (string=? defperformancenotes "")

@@ -39,3 +39,13 @@ optionalNotes =
                   (set! elements (cdr elements))))
                 copy) x))
    x))
+
+%% skips: Insert a given number of lyric skips
+skips =
+#(define-music-function
+  (parser location nskips)
+  (integer?)
+  #{
+  \repeat unfold #nskips { \skip 1 }
+  #}
+)
