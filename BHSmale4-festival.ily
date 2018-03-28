@@ -4,41 +4,45 @@
 
 %% FESTIVAL
 \include "festival.ly"
-\festival #"tenor.xml" {\global} {
+\festival #"tenor.xml" { \Time } {
   <<
-    \global
+    \Key
+    \Time
     \context Voice = tenors {
-      \removeWithTag #'layout \tenorMusic
+      \removeWithTag #'layout \TenorMusic
     }
     \context Lyrics = tenorlyrics \lyricsto tenors \tenorFestival
   >>
 }
 
-\festival #"lead.xml" {\global} {
+\festival #"lead.xml" { \Time } {
   <<
-    \global
+    \Key
+    \Time
     \context Voice = leads {
-      \removeWithTag #'layout \leadMusic
+      \removeWithTag #'layout \LeadMusic
     }
     \context Lyrics = leadlyrics \lyricsto leads \leadFestival
   >>
 }
 
-\festival #"bari.xml" {\global} {
+\festival #"bari.xml" { \Time } {
   <<
-    \global
+    \Key
+    \Time
     \context Voice = baris {
-      \removeWithTag #'layout \bariMusic
+      \removeWithTag #'layout \BariMusic
     }
     \context Lyrics = barilyrics \lyricsto baris \bariFestival
   >>
 }
 
-\festival #"bass.xml" {\global} {
+\festival #"bass.xml" { \Time } {
   <<
-    \global
+    \Key
+    \Time
     \context Voice = basses {
-      \removeWithTag #'layout \bassMusic
+      \removeWithTag #'layout \BassMusic
     }
     \context Lyrics = basslyrics \lyricsto basses \bassFestival
   >>
