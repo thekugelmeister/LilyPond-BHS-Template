@@ -519,7 +519,7 @@ Piano = \make-pianostaff
     \override BarNumber.font-name = "Times"
     \override BarNumber.font-size = \absFontSize #10
     \override BarNumber.break-visibility = ##(#f #f #f)
-    barNumberVisibility = #all-bar-numbers-visible
+    barNumberVisibility = #first-bar-number-visible-and-no-parenthesized-bar-numbers
 
     %%% Format rehearsal marks
     %%% @Section A.11.a

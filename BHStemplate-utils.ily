@@ -77,6 +77,9 @@ absFontSize =
    (stack-lines -1 0.0 baseline aligned-mols)))
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+#(define-public (first-bar-number-visible-and-no-parenthesized-bar-numbers barnum mp)
+  (= (ly:moment-main-numerator mp) 0))
+
                                 % TODO: define-scheme-function vs define?
                                 % TODO: I don't like that "ShowBarNumbers" is hard-coded here
 #(define (set-show-bar-num-top-staff! voice-list)
