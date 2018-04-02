@@ -1,51 +1,81 @@
 \version "2.19.49"
 
-                                % TODO: This requires that the user includes two sets of lyrics for each part. If I can avoid that, I should...
+                                % TODO: Putting it in syllabify mode ensures that strange syllables get treated as full valued notes, but a lot of words are pronounced wrong as a result.
+                                % TODO: Chipmunk voices are preferable to tempo limiations and pitch issues for tenor. But if we can avoid the chipmunk voices, it would be better...
+                                % TODO: Stop printing layout...
 
-%% FESTIVAL
 \include "festival.ly"
-\festival #"tenor.xml" { \Time } {
-  <<
-    \Key
-    \Time
-    \context Voice = tenors {
-      \removeWithTag #'layout \TenorMusic
+% \festivalsylslow #"filename" { \tempo N = X } { music }
+festivalsylslow =
+#(define-music-function (filename tempo music)
+  (string? ly:music? ly:music?)
+  (parameterize ((*syllabify* #t)
+                 (*base-octave-shift* -1))
+   (output-file music tempo filename))
+  music)
+
+\book {
+  \bookOutputName "tenorfestival"
+  \score {
+    \festivalsylslow #"tenor.xml" { \Time } {
+      <<
+        \Key
+        \Time
+        \context Voice = tenors {
+          \keepWithTag #'play \TenorMusic
+        }
+        \context Lyrics = tenorlyrics \lyricsto tenors \TenorLyrics
+      >>
     }
-    \context Lyrics = tenorlyrics \lyricsto tenors \tenorFestival
-  >>
+  }
 }
 
-\festival #"lead.xml" { \Time } {
-  <<
-    \Key
-    \Time
-    \context Voice = leads {
-      \removeWithTag #'layout \LeadMusic
+\book {
+  \bookOutputName "leadfestival"
+  \score {
+    \festivalsylslow #"lead.xml" { \Time } {
+      <<
+        \Key
+        \Time
+        \context Voice = leads {
+          \keepWithTag #'play \LeadMusic
+        }
+        \context Lyrics = leadlyrics \lyricsto leads \LeadLyrics
+      >>
     }
-    \context Lyrics = leadlyrics \lyricsto leads \leadFestival
-  >>
+  }
 }
 
-\festival #"bari.xml" { \Time } {
-  <<
-    \Key
-    \Time
-    \context Voice = baris {
-      \removeWithTag #'layout \BariMusic
+\book {
+  \bookOutputName "barifestival"
+  \score {
+    \festivalsylslow #"bari.xml" { \Time } {
+      <<
+        \Key
+        \Time
+        \context Voice = baris {
+          \keepWithTag #'play \BariMusic
+        }
+        \context Lyrics = barilyrics \lyricsto baris \BariLyrics
+      >>
     }
-    \context Lyrics = barilyrics \lyricsto baris \bariFestival
-  >>
+  }
 }
 
-\festival #"bass.xml" { \Time } {
-  <<
-    \Key
-    \Time
-    \context Voice = basses {
-      \removeWithTag #'layout \BassMusic
+\book {
+  \bookOutputName "bassfestival"
+  \score {
+    \festivalsylslow #"bass.xml" { \Time } {
+      <<
+        \Key
+        \Time
+        \context Voice = basss {
+          \keepWithTag #'play \BassMusic
+        }
+        \context Lyrics = basslyrics \lyricsto basss \BassLyrics
+      >>
     }
-    \context Lyrics = basslyrics \lyricsto basses \bassFestival
-  >>
+  }
 }
 
 %% Run Festival on all files
@@ -55,7 +85,9 @@
 #(system "text2wave -mode singing bass.xml -o bass.wav")
 
 %% Combine parts
-#(system (string-append "sox -m tenor.wav lead.wav bari.wav bass.wav " (ly:parser-output-name) ".wav"))
+#(system "sox -m tenor.wav lead.wav bari.wav bass.wav festivalslow.wav")
+#(system (string-append "sox festivalslow.wav " (ly:parser-output-name) ".wav speed 2"))
+% #(system (string-append "sox -m tenor.wav lead.wav bari.wav bass.wav " (ly:parser-output-name) ".wav"))
 
 %% Clean up
-#(system "rm tenor.xml tenor.wav lead.xml lead.wav bari.xml bari.wav bass.xml bass.wav")
+#(system "rm tenor.xml tenor.wav tenorfestival.pdf lead.xml lead.wav leadfestival.pdf bari.xml bari.wav barifestival.pdf bass.xml bass.wav bassfestival.pdf festivalslow.wav")

@@ -44,6 +44,7 @@ variables, like this:
 Key = { ... }
 Time = { ... }
 Chords = \chordmode { ... }
+SoloClef = "..."
 SoloMusic = \relative { ... }
 SoloLyrics = \lyricmode { ... }
 TenorOneMusic = \relative { ... }
@@ -191,6 +192,7 @@ perfnotes = #(if PerformanceNotes
   max-systems-per-page = 5
                                 % TODO: Code a solution to specifying max systems for first page
                                 % Long story short, the optimal-breaking algorithm has to apply to every page. First page can have 3-4 systems. Other pages can have 4-5 systems. Leaving this out for now because it becomes unreadable sometimes otherwise.
+                                % TODO: Min systems per page would also only be able to apply for 4-part 2-staff arrangements...
   % max-systems-first-page = 4
   % min-systems-first-page = 3
 
@@ -416,7 +418,7 @@ perfnotes = #(if PerformanceNotes
 #(if (not SoloClef)
   (set! SoloClef "treble_8"))
 
-%% Set up to force bar-number display for top divided staff if not specified otherwise by the user
+%% Set up to force bar-number display for top staff if not specified otherwise by the user
 #(define staff-order '("TenorOne" "TenorTwo" "Tenor" "Lead" "LeadOne" "LeadTwo" "BariOne" "BariTwo" "Bari" "Bass" "BassOne" "BassTwo"))
 #(set-show-bar-num-top-staff! staff-order)
 % #(display (map (lambda (v) (make-id v "ShowBarNumbers")) staff-order))
@@ -470,35 +472,33 @@ perfnotes = #(if PerformanceNotes
 % TODO: I feel as if either a) the divided-staff-show-bar-nums? nonsense should go inside the staff creation function or b) this is just kind of silly how I'm doing it. Revisit this. But for now it works quite well actually.
 BHSTEMPLATE =
 <<
-  #(if Chords
-       #{ \new ChordNames { #Chords } #})
   \bhs-make-one-voice-vocal-staff "Solo" #SoloClef
   \new ChoirStaff
   <<
     #(if TenorTwoVoicesPerStaff
          #{ \bhs-make-two-voice-vocal-staff #(divided-staff-show-bar-nums? "TenorOne" "TenorTwo") "TenorDivided" "treble_8" "TenorOne" "TenorTwo" #}
-         #{ << \bhs-make-one-voice-vocal-staff "TenorOne" "treble_8"
-               \bhs-make-one-voice-vocal-staff "TenorTwo" "treble_8" >> #} )
+         #{ << \bhs-make-one-voice-vocal-staff #TenorOneShowBarNumbers "TenorOne" "treble_8"
+               \bhs-make-one-voice-vocal-staff #TenorTwoShowBarNumbers "TenorTwo" "treble_8" >> #} )
     #(if UpperTwoVoicesPerStaff
          #{ \bhs-make-two-voice-vocal-staff #(divided-staff-show-bar-nums? "Tenor" "Lead") "UpperDivided" "treble_8" "Tenor" "Lead" #}
-         #{ << \bhs-make-one-voice-vocal-staff "Tenor" "treble_8"
-               \bhs-make-one-voice-vocal-staff "Lead" "treble_8" >> #} )
+         #{ << \bhs-make-one-voice-vocal-staff #TenorShowBarNumbers "Tenor" "treble_8"
+               \bhs-make-one-voice-vocal-staff #LeadShowBarNumbers "Lead" "treble_8" >> #} )
     #(if LeadTwoVoicesPerStaff
          #{ \bhs-make-two-voice-vocal-staff #(divided-staff-show-bar-nums? "LeadOne" "LeadTwo") "LeadDivided" "treble_8" "LeadOne" "LeadTwo" #}
-         #{ << \bhs-make-one-voice-vocal-staff "LeadOne" "treble_8"
-               \bhs-make-one-voice-vocal-staff "LeadTwo" "treble_8" >> #} )
+         #{ << \bhs-make-one-voice-vocal-staff #LeadOneShowBarNumbers "LeadOne" "treble_8"
+               \bhs-make-one-voice-vocal-staff #LeadTwoShowBarNumbers "LeadTwo" "treble_8" >> #} )
     #(if BariTwoVoicesPerStaff
          #{ \bhs-make-two-voice-vocal-staff #(divided-staff-show-bar-nums? "BariOne" "BariTwo") "BariDivided" "bass" "BariOne" "BariTwo" #}
-         #{ << \bhs-make-one-voice-vocal-staff "BariOne" "bass"
-               \bhs-make-one-voice-vocal-staff "BariTwo" "bass" >> #} )
+         #{ << \bhs-make-one-voice-vocal-staff #BariOneShowBarNumbers "BariOne" "bass"
+               \bhs-make-one-voice-vocal-staff #BariTwoShowBarNumbers "BariTwo" "bass" >> #} )
     #(if LowerTwoVoicesPerStaff
          #{ \bhs-make-two-voice-vocal-staff #(divided-staff-show-bar-nums? "Bari" "Bass") "LowerDivided" "bass" "Bari" "Bass" #}
-         #{ << \bhs-make-one-voice-vocal-staff "Bari" "bass"
-               \bhs-make-one-voice-vocal-staff "Bass" "bass" >> #} )
+         #{ << \bhs-make-one-voice-vocal-staff #BariShowBarNumbers "Bari" "bass"
+               \bhs-make-one-voice-vocal-staff #BassShowBarNumbers "Bass" "bass" >> #} )
     #(if BassTwoVoicesPerStaff
          #{ \bhs-make-two-voice-vocal-staff #(divided-staff-show-bar-nums? "BassOne" "BassTwo") "BassDivided" "bass" "BassOne" "BassTwo" #}
-         #{ << \bhs-make-one-voice-vocal-staff "BassOne" "bass"
-               \bhs-make-one-voice-vocal-staff "BassTwo" "bass" >> #} )
+         #{ << \bhs-make-one-voice-vocal-staff #BassOneShowBarNumbers "BassOne" "bass"
+               \bhs-make-one-voice-vocal-staff #BassTwoShowBarNumbers "BassTwo" "bass" >> #} )
   >>
 >>
 
@@ -551,11 +551,12 @@ Piano = \make-pianostaff
   }
 }
 
+% TODO: Is this the best way to only include chords in printed output? Seems to me as if adding the "play" tag might be better, although I worry about creating midi tracks...
 \book {
   \score {
     \keepWithTag #'print
     #(if have-music
-         #{ << \BHSTEMPLATE \Piano >> #}
+         #{ << #(if Chords #{ \new ChordNames { #Chords } #}) \BHSTEMPLATE \Piano >> #}
          #{ { } #} )
     \layout { $(if Layout Layout) }
   }
