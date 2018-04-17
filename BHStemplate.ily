@@ -131,7 +131,8 @@ the printed score or in the MIDI file respectively.
 #(define option-variable-names
   ;; User-defined options (boolean)
   '("TagPage"
-    "ShowTempoMarking"))
+    "ShowTempoMarking"
+    "Festival"))
 
 #(define-missing-variables! footer-variable-names)
 #(define-missing-variables! option-variable-names)
@@ -580,3 +581,6 @@ Piano = \make-pianostaff
     }
   }
 }
+
+\include "BHStemplate-festival.ily"
+#(if RunFestival (bhs-festival))
