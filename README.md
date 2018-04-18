@@ -8,6 +8,7 @@ This repository specifies a template for LilyPond to make engraved scores that m
 
 ## License
 Copyright 2014, 2018 Jeff Harris, Jeremy Marcus
+
 See [LICENSE.txt][2] for details.
 
 LilyPond, Frescobaldi, and this template are published under the GNU General Public License (http://www.gnu.org/licenses/gpl.html)
