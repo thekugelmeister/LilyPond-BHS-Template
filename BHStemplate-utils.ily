@@ -1,23 +1,6 @@
-\version "2.19.25"
-
-                                % TODO: Check whether there are any issues with these includes being redundant or anything...
-#(ly:load "lily-library.scm")
-#(ly:load "define-markup-commands.scm")
-#(use-modules (ice-9 regex))
-#(use-modules (srfi srfi-1))
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Utility functions from BHScss.ily
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% These functions may or may not be necessary, but I haven't gone back to
-%%% test them yet. Including copyright statement from that file just in case.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-                                % TODO: See notes above.
-                                % TODO: Document these better if they are necessary
 %{
-
-Copyright 2014 Jeff Harris
-This is distributed under the terms of the GNU General Public License
+Copyright 2014, 2018 Jeff Harris, Jeremy Marcus
+This is distributed under the terms of the GNU General Public License.
 
 This file is part of LilyPond Barbershop Template.
 
@@ -32,10 +15,24 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
-
+along with LilyPond Barbershop Template.  If not, see <http://www.gnu.org/licenses/>.
 %}
 
+\version "2.19.25"
+                                % TODO: Check whether there are any issues with these includes being redundant or anything...
+#(ly:load "lily-library.scm")
+#(ly:load "define-markup-commands.scm")
+#(use-modules (ice-9 regex))
+#(use-modules (srfi srfi-1))
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Utility functions from BHScss.ily (Copyright 2014 Jeff Harris)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% These functions may or may not be necessary, but I haven't gone back to
+%%% test them yet. Including copyright statement from that file just in case.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                % TODO: See notes above.
+                                % TODO: Document these better if they are necessary
 allowGrobCallback =
 #(define-scheme-function (syms) (symbol-list?)
   (let ((interface (car syms))
@@ -75,11 +72,23 @@ absFontSize =
 #(define (general-column align-dir baseline mols)
   (let* ((aligned-mols (map (lambda (x) (ly:stencil-aligned-to x X align-dir)) mols)))
    (stack-lines -1 0.0 baseline aligned-mols)))
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Bar number visibility function
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Enables display of first measure bar number and suppresses parenthesization
+%%% of bar numbers for partial measures.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 #(define-public (first-bar-number-visible-and-no-parenthesized-bar-numbers barnum mp)
   (= (ly:moment-main-numerator mp) 0))
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Staff bar number display
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Functions for determining which staves should show bar numbers.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                 % TODO: define-scheme-function vs define?
                                 % TODO: I don't like that "ShowBarNumbers" is hard-coded here
 #(define (set-show-bar-num-top-staff! voice-list)
@@ -99,8 +108,27 @@ to true. If no music is found, nothing happens."
 staff has ShowBarNumbers == true."
   (or (make-id voice1 "ShowBarNumbers") (make-id voice2 "ShowBarNumbers")))
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% LilyPond property string formatting
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Extend LilyPond property functionality to format strings before returning.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
                                 % TODO: String checking?
                                 % TODO: Are These overkill? Maybe, but it's a known fix for a known bug that I don't feel like addressing.
+#(define-markup-command (capsfromproperty layout props symbol)
+  (symbol?)
+  "Read the @var{symbol} from property settings, and produce a stencil
+from the markup contained within.  If @var{symbol} is not defined, it
+returns an empty markup.
+
+Capitalizes the string returned from evaluating symbol."
+  (let ((m (chain-assoc-get symbol props)))
+   (if (markup? m)
+    ;; prevent infinite loops by clearing the interpreted property:
+    (interpret-markup layout (cons (list (cons symbol `(,property-recursive-markup ,symbol))) props) (string-upcase m))
+    empty-stencil)))
+
 #(define-markup-command (concapsfromproperty layout props symbol before after)
   (symbol? string? string?)
   "Read the @var{symbol} from property settings, and produce a stencil
@@ -115,20 +143,12 @@ together before, the capitalized string, and after."
     (interpret-markup layout (cons (list (cons symbol `(,property-recursive-markup ,symbol))) props) (string-append before (string-upcase m) after))
     empty-stencil)))
 
-#(define-markup-command (capsfromproperty layout props symbol)
-  (symbol?)
-  "Read the @var{symbol} from property settings, and produce a stencil
-from the markup contained within.  If @var{symbol} is not defined, it
-returns an empty markup.
 
-Capitalizes the string returned from evaluating symbol."
-  (let ((m (chain-assoc-get symbol props)))
-   (if (markup? m)
-    ;; prevent infinite loops by clearing the interpreted property:
-    (interpret-markup layout (cons (list (cons symbol `(,property-recursive-markup ,symbol))) props) (string-upcase m))
-    empty-stencil)))
-
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Extended wordwrap functionality
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Wordwrap functions providing additional formatting and layout options.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 #(define-markup-command (wordwrap-string-centered layout props arg)
   (string?)
   #:properties ((baseline-skip))
@@ -136,7 +156,6 @@ Capitalizes the string returned from evaluating symbol."
 Places the resulting lines in a centered column."
   (general-column CENTER baseline-skip
    (wordwrap-string-internal-markup-list layout props #f arg)))
-
 
                                 % TODO: There has to be a more elegant solution than just adding a line between each paragraph that includes a single whitespace character. But it just works so well.
 #(define-markup-list-command (wordwrap-pstring-internal layout props justify arg)
@@ -194,7 +213,9 @@ Skips lines between paragraphs.
   (stack-lines DOWN 0.0 baseline-skip
    (wordwrap-pstring-internal-markup-list layout props #f arg)))
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Lyricist, Composer, Arranger Logic
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %{
 TODO: For lack of a better option, I'm doing this in a redundant manner. If I can figure out how to improve this, I should do so.
 
@@ -221,6 +242,7 @@ The integer mapping is as follows:
 3: Composer and Arranger are the same (NOT COVERED)
 4: All three are different
 %}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 lycoar =
 #(define-scheme-function (lyricist composer arranger)
   (string? string? string?)

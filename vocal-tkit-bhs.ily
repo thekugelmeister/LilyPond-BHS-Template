@@ -1,12 +1,32 @@
-%\version "2.19.22"
 %{
-JEREMY'S NOTES:
+Copyright 2018 Jeremy Marcus
+This is distributed under the terms of the GNU General Public License.
+
+This file is part of LilyPond Barbershop Template.
+
+LilyPond Barbershop Template is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+LilyPond Barbershop Template is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with LilyPond Barbershop Template.  If not, see <http://www.gnu.org/licenses/>.
+%}
+
+%\version "2.19.22"
+\include "lyrics-tkit.ly"
+\include "staff-tkit-bhs.ily"
+
+%{
+JEREMY'S NOTE:
 This edited version of vocal-tkit.ly was created to allow me to change some hard-coded formatting placed in the
 original version of the tkit, e.g. forced all-caps instrument names.
 %}
-
-\include "lyrics-tkit.ly"
-\include "staff-tkit-bhs.ily"
 
 bhs-make-one-voice-vocal-staff =
 #(define-music-function (show-barNums name clef)

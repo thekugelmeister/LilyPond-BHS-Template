@@ -1,24 +1,44 @@
-%\version "2.19.22"
 %{
-JEREMY'S NOTES:
+Copyright 2018 Jeremy Marcus
+This is distributed under the terms of the GNU General Public License.
+
+This file is part of LilyPond Barbershop Template.
+
+LilyPond Barbershop Template is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+LilyPond Barbershop Template is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with LilyPond Barbershop Template.  If not, see <http://www.gnu.org/licenses/>.
+%}
+
+%\version "2.19.22"
+\include "voice-tkit-bhs.ily"
+
+%{
+Staff-oriented functions
+
+These assume the following lists have been defined:
+  * voice-prefixes  eg "Lead"
+  * voice-postfixes  eg "Music"
+  * lyrics-postfixes  eg "Lyrics"
+  * lyrics-names  eg "VerseOne"
+  * variable-names  eg "Time"
+
+The first three lists are used to generate compound
+names such as "LeadLyrics" and "LeadInstrumentName"
+The last two lists of names are used as-is.
+
+JEREMY'S NOTE:
 This edited version of staff-tkit.ly was created to allow me to change some hard-coded formatting placed in the
 original version of the tkit, e.g. forced all-caps instrument names.
 %}
-\include "voice-tkit-bhs.ily"
-
-
-%% Staff-oriented functions
-
-% These assume the following lists have been defined:
-%   voice-prefixes  eg "Soprano"
-%   voice-postfixes  eg "Music"
-%   lyrics-postfixes  eg "Lyrics"
-%   lyrics-names  eg "VerseOne"
-%   variable-names  eg "Time"
-%
-% The first three lists are used to generate compound
-% names such as "SopranoLyrics" and "SopranoInstrumentName"
-% The last two lists of names are used as-is.
 
 
 bhs-make-one-voice-staff =
