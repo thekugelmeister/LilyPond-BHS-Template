@@ -36,8 +36,8 @@ Also included are a number of useful markup functions for common BHS markup (e.g
 * Slight adjustments to layout to reflect updated notation guidelines
 * Complete re-structuring of template
 
-[1]: www.barbershop.org/files/documents/getandmakemusic/Barbershop%20Notation%20Manual.pdf
-[2]: ./blob/master/LICENSE.txt
-[3]: lilypond.org
-[4]: festvox.org/festival/
-[5]: frescobaldi.org
+[1]: http://www.barbershop.org/files/documents/getandmakemusic/Barbershop%20Notation%20Manual.pdf
+[2]: ./LICENSE.txt
+[3]: http://lilypond.org
+[4]: http://festvox.org/festival/
+[5]: http://frescobaldi.org
