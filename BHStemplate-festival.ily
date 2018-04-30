@@ -23,13 +23,26 @@ along with LilyPond Barbershop Template.  If not, see <http://www.gnu.org/licens
 #(use-modules (ice-9 format))
 
                                 % TODO: Right now you have to run BHStemplate.ily first to initialize everything. Maybe make it stand-alone? Is it worth it?
-                                % TODO: Document available versions of processing (syl/slow,etc.) and when to use them.
+                                % TODO: sox crashes when only one voice part provided.
+                                % TODO: Make FestivalHalfTempo work automatically, instead of requiring user to change tempo globally.
+                                % TODO: Should FestivalOctaveDown and FestivalHalfTempo be mutually exclusive options?
 
+%{
+FestivalOctaveDown must be used if any part hits a note over 500 Hz (B5 by Festival standards, B4 by most other standards).
+This is due to a bug in Festival, in "festival/src/modules/UniSyn/us_prosody.cc" (I am virtually certain). In the
+function "f0_to_pitchmarks", there is a hard-coded limit of 500 when checking the frequency track, which attempts to
+re-assign any offending frequencies to the frequency of the previous element of the array, without bounds checking.
+This is why Festival reproducibly segfaults if the first note is B5 or higher, but changes later too-high notes to B5
+and works at other times.
+
+See "speech_tools/sigpr/pda/srpd.h" for more evidence (more hard-coded limits, albeit at different magnitudes).
+%}
 #(define festival-variable-names
   ;; User-defined options (boolean)
   '("RunFestival"
     "FestivalSyllabify"
-    "FestivalSlow"
+    "FestivalOctaveDown"
+    "FestivalHalfTempo"
     "FestivalNoCleanup"))
 
 #(define-missing-variables! festival-variable-names)
@@ -47,7 +60,7 @@ festivalsylslow =
 #(define-music-function
   (filename tempo music)
   (string? ly:music? ly:music?)
-  (let ((octave-shift (if FestivalSlow -1 0)))
+  (let ((octave-shift (if FestivalOctaveDown -1 0)))
    (parameterize ((*syllabify* FestivalSyllabify)
                   (*base-octave-shift* octave-shift))
     (output-file music tempo filename)))
@@ -90,7 +103,7 @@ bhs-festival =
   (format #t "\nRunning Festival for the following voices: ~a" festival-voices)
   (map festivalsylslow-voicebook festival-voices)
   (display "\nCombining parts...")
-  (if FestivalSlow
+  (if FestivalOctaveDown
    (begin
     (system (format #f "sox -m ~{~a.wav ~} festivalslow.wav"
              festival-voices))
@@ -100,9 +113,19 @@ bhs-festival =
    (system (format #f "sox -m ~{~a.wav ~} ~a.wav"
             festival-voices
             (ly:parser-output-name))))
+  (if FestivalHalfTempo
+   (begin
+    (system (format #f "sox -m ~{~a.wav ~} festivalslow.wav"
+             festival-voices))
+    (display "\nCorrecting tempo...")
+    (system (format #f "sox festivalslow.wav ~a.wav tempo 2"
+             (ly:parser-output-name))))
+   (system (format #f "sox -m ~{~a.wav ~} ~a.wav"
+            festival-voices
+            (ly:parser-output-name))))
   (if (not FestivalNoCleanup)
    (begin
     (display "\nCleaning up after Festival processing...")
     (map festival-voicecleanup festival-voices)
-    (if FestivalSlow
+    (if (or FestivalOctaveDown FestivalHalfTempo)
      (system "rm festivalslow.wav")))))
