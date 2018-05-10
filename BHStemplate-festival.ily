@@ -96,6 +96,7 @@ festival-voicecleanup =
            voicename
            voicename)))
 
+% TODO: The logic for which version of output is kind of flawed. Revisit this.
 bhs-festival =
 #(define-void-function
   ()
@@ -109,17 +110,15 @@ bhs-festival =
              festival-voices))
     (display "\nCorrecting speed...")
     (system (format #f "sox festivalslow.wav ~a.wav speed 2"
-             (ly:parser-output-name))))
-   (system (format #f "sox -m ~{~a.wav ~} ~a.wav"
-            festival-voices
-            (ly:parser-output-name))))
+             (ly:parser-output-name)))))
   (if FestivalHalfTempo
    (begin
     (system (format #f "sox -m ~{~a.wav ~} festivalslow.wav"
              festival-voices))
     (display "\nCorrecting tempo...")
     (system (format #f "sox festivalslow.wav ~a.wav tempo 2"
-             (ly:parser-output-name))))
+             (ly:parser-output-name)))))
+  (if (not (or FestivalOctaveDown FestivalHalfTempo))
    (system (format #f "sox -m ~{~a.wav ~} ~a.wav"
             festival-voices
             (ly:parser-output-name))))
