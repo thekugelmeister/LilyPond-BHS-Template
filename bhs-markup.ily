@@ -69,3 +69,17 @@ skips =
   \repeat unfold #nskips { \skip 1 }
   #}
 )
+
+% TODO: Can this be done automatically somehow rather than requiring input of y offset?
+%% melodyTransfer: Indicate a melody transfer between voices.
+%% Usage: \melodyTransfer #3 c4 \glissando
+%%% @Section B.10
+melodyTransfer =
+#(define-music-function
+  (parser location yoffset)
+  (number?)
+  #{
+  \once \override Glissando.style = #'dashed-line
+  \once \override Glissando.bound-details.right.Y = #yoffset
+  #}
+)
