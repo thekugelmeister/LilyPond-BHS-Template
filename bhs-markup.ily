@@ -70,16 +70,20 @@ skips =
   #}
 )
 
-% TODO: Can this be done automatically somehow rather than requiring input of y offset?
+%% adapted from http://lsr.di.unimi.it/LSR/Snippet?id=961
 %% melodyTransfer: Indicate a melody transfer between voices.
-%% Usage: \melodyTransfer #3 c4 \glissando
+%% Usage: -\markup { \melodyTransfer #angle #length #xoffset yoffset }
 %%% @Section B.10
-melodyTransfer =
-#(define-music-function
-  (parser location yoffset)
-  (number?)
-  #{
-  \once \override Glissando.style = #'dashed-line
-  \once \override Glissando.bound-details.right.Y = #yoffset
-  #}
-)
+#(define-markup-command (melodyTransfer layout props angle length xoffset yoffset) 
+  (number? number? number? number?)
+  (interpret-markup layout props
+   #{
+   \markup {
+   \with-dimensions #'(0 . 0) #'(0 . 0)
+   \translate #(cons xoffset yoffset)
+   \rotate #angle
+   \with-dimensions #'(0 . 0) #'(0 . 0)
+   \translate #(cons 0 (- 0 length))
+   \draw-dashed-line #(cons 0 length)
+ }
+   #}))
