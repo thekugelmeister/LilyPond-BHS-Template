@@ -18,7 +18,7 @@ You should have received a copy of the GNU General Public License
 along with LilyPond Barbershop Template.  If not, see <http://www.gnu.org/licenses/>.
 %}
 
-\version "2.19.25"
+\version "2.20"
                                 % TODO: Check whether there are any issues with these includes being redundant or anything...
 #(ly:load "lily-library.scm")
 #(ly:load "define-markup-commands.scm")

@@ -18,7 +18,7 @@ You should have received a copy of the GNU General Public License
 along with LilyPond Barbershop Template.  If not, see <http://www.gnu.org/licenses/>.
 %}
 
-\version "2.19.49"
+\version "2.20"
 \include "festival.ly"
 #(use-modules (ice-9 format))
 
@@ -62,9 +62,10 @@ festivalsylslow =
   (string? ly:music? ly:music?)
   (let ((octave-shift (if FestivalOctaveDown -1 0)))
    (parameterize ((*syllabify* FestivalSyllabify)
-                  (*base-octave-shift* octave-shift))
+                )
     (output-file music tempo filename)))
   music)
+                                % (*base-octave-shift* octave-shift)
 
 %% Make a single festival book (to output festival xml file) and run festival on output
 festivalsylslow-voicebook =

@@ -18,7 +18,7 @@ You should have received a copy of the GNU General Public License
 along with LilyPond Barbershop Template.  If not, see <http://www.gnu.org/licenses/>.
 %}
 
-\version "2.19"
+\version "2.20"
                                 % TODO: Document available variables better
                                 % TODO: Default to TwoVoicesPerStaff = ##t if possible
                                 % TODO: Find a way to end lyric extenders when they are followed immediately by lyric skips.
