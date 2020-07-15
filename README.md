@@ -1,3 +1,10 @@
+# STATUS: Archived
+This repository has been archived in favor of an improved, updated, and hopefully cleaner version, which can be found [here][6]!. This new version was created from the ground up, rather than starting with the base template I first found and forked. I owe a huge debt to @tahongawaka for laying the groundwork and inspiring/enabling me to make something that fit my workflow.
+
+When I started making this template, I knew nothing about the inner-workings of LilyPond. Armed with a mostly-complete notation manual, too much free time, and whatever scheme knowledge I had retained from one unit of one class in college (a.k.a. very little), I gradually managed to put together something that got pretty close to correct! I learned a tremendous amount along the way, to the point where I wasn't just blindly changing parameters and copying in LSR code anymore. But by that point, functionality had been added blindly without thought for organization, simplicity, robustness, or ease-of-use. I decided I wanted to start over from the beginning and fix everything.
+
+This repository has served me well. I am excited to use its successor for years to come.
+
 # Lilypond-BHS-Template
 LilyPond does a very nice job of producing scores correctly notated, but the Barbershop Harmony Society has requirements for publication to maintain a consistent appearance across arrangements. The goal of this project is to allow the Barbershop arranger to worry more about the correct words and notes than whether the page looks right.
 
@@ -41,3 +48,4 @@ Also included are a number of useful markup functions for common BHS markup (e.g
 [3]: http://lilypond.org
 [4]: http://festvox.org/festival/
 [5]: http://frescobaldi.org
+[6]: https://github.com/thekugelmeister/lilypond-bhs
